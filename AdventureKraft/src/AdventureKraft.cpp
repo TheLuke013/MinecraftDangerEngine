@@ -1,9 +1,7 @@
-#include <iostream>
+#include "DangerEngine.h"
 
 int main()
 {
-	std::cout << "AdventureKraft for Minecraft Bedrock Edition" << std::endl;
-	std::cin.get();
-
+	Test();
 	return 0;
 }
