@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 
 project(DangerEngine)
 
-add_compile_definitions(BUILD_DLL)
+add_compile_definitions(DANGER_ENGINE_EXPORTS)
 
 file(GLOB_RECURSE CPP_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 file(GLOB_RECURSE H_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")

@@ -3,6 +3,7 @@
 
 #include "Core.h"
 
-DANGER_API void Test();
+//MINECRAFT
+#include "Minecraft/Manifest.h"
 
 #endif
