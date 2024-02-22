@@ -2,6 +2,7 @@
 #define MANIFEST_H
 
 #include "../Core.h"
+#include "../nlohmann/json.hpp"
 
 namespace DE
 {
