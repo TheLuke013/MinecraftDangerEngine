@@ -65,44 +65,60 @@ namespace DE
 		std::string ParseJson();
 
 
+		/*GETTERS*/
+
+
+		//HEADER
+		inline unsigned int GetFormatVersion() { return formatVersion; }
+
+		inline std::string GetHeaderDescription() const { return headerData.description; }
+		inline std::string GetHeaderName() const { return headerData.name; }
+		inline std::string GetHeaderUuid() const { return headerData.uuid; }
+		inline std::vector<unsigned int> GetHeaderVersion() const { return headerData.version; }
+		inline std::vector<unsigned int> GetHeaderMinEngineVersion() const { return headerData.minEngineVersion; }
+
+		//MODULES
+		inline std::string GetModuleDescription(unsigned int index) const { return modules[index].description; }
+		inline ModuleType GetModuleType(unsigned int index) const { return modules[index].type; }
+		inline std::string GetModuleUuid(unsigned int index) const { return modules[index].uuid; }
+		inline std::vector<unsigned int> GetModuleVersion(unsigned int index) const { return modules[index].version; }
+
+		//DEPENDENCIES
+		inline std::string GetDependenciesUuid() const { return dependenciesData.uuid; }
+		inline std::vector<unsigned int> GetDependenciesVersion() const { return dependenciesData.version; }
+
+		//METADATA
+		inline std::vector<std::string> GetMetadataAuthors() const { return metadata.authors; }
+		inline std::string GetMetadataLicense() const { return metadata.license; }
+		inline std::string GetMetadataUrl() const { return metadata.url; }
+
+
 		/*SETTERS*/
 
 
 		//HEADER
-		unsigned int GetFormatVersion() { return formatVersion; }
+		inline void SetFormatVersion(unsigned int p_formatVersion) { formatVersion = p_formatVersion; }
 
-		std::string GetHeaderDescription() { return headerData.description; }
-		std::string GetHeaderName() { return headerData.name; }
-		std::string GetHeaderUuid() { return headerData.uuid; }
-		std::vector<unsigned int> GetHeaderVersion() { return headerData.version; }
-		std::vector<unsigned int> GetHeaderMinEngineVersion() { return headerData.minEngineVersion; }
-
-		//MODULES
-		std::string GetModuleDescription(unsigned int index) { return modules[index].description; }
-		ModuleType GetModuleType(unsigned int index) { return modules[index].type; }
-		std::string GetModuleUuid(unsigned int index) { return modules[index].uuid; }
-		std::vector<unsigned int> GetModuleVersion(unsigned int index) { return modules[index].version; }
-
-		//DEPENDENCIES
-		std::string GetDependenciesUuid() { return dependenciesData.uuid; }
-		std::vector<unsigned int> GetDependenciesVersion() { return dependenciesData.version; }
-
-		//METADATA
-		std::vector<std::string> GetMetadataAuthors() { return metadata.authors; }
-		std::string GetMetadataLicense() { return metadata.license; }
-		std::string GetMetadataUrl() { return metadata.url; }
-
-
-		/*SETTERS*/
-
-
-		//HEADER
+		inline void SetHeaderDescription(const std::string& newDescription) { headerData.description = newDescription; }
+		inline void SetHeaderName(const std::string& newName) { headerData.name = newName; }
+		inline void SetHeaderUuid(const std::string& newUuid) { headerData.uuid = newUuid; }
+		inline void SetHeaderVersion(std::vector<unsigned int> newVersion) { headerData.version = newVersion; }
+		inline void SetHeaderMinEngineVersion(std::vector<unsigned int> newEngineVersion) { headerData.minEngineVersion = newEngineVersion; }
 
 		//MODULES
+		inline void SetModuleDescription(unsigned int index, const std::string& newDescription) { modules[index].description = newDescription; }
+		inline void SetModuleType(unsigned int index, ModuleType newType) { modules[index].type = newType; }
+		inline void SetModuleUuid(unsigned int index, const std::string& newUuid) { modules[index].uuid = newUuid; }
+		inline void SetModuleVersion(unsigned int index, std::vector<unsigned int> newVersion) { modules[index].version = newVersion; }
 
 		//DEPENDENCIES
+		inline void SetDependenciesUuid(const std::string& newUuid) { dependenciesData.uuid = newUuid; }
+		inline void SetDependenciesVersion(std::vector<unsigned int> newVersion) { dependenciesData.version = newVersion; }
 
 		//METADATA
+		inline void SetMetadataAuthors(std::vector<std::string> newMetadataAuthors) { metadata.authors = newMetadataAuthors; }
+		inline void SetMetadataLicense(const std::string& newLicense) { metadata.license = newLicense; }
+		inline void SetMetadataUrl(const std::string& newUrl) { metadata.url = newUrl; }
 
 	private:
 		unsigned int formatVersion;

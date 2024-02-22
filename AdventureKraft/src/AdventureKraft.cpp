@@ -4,6 +4,11 @@ int main()
 {
 	DE::Manifest manifest(2, "AdventureKraft", "An official port of the AdventureKraft mod for Minecraft Bedrock");
 
+	manifest.SetFormatVersion(3);
+	manifest.SetHeaderDescription("new description!");
+	manifest.SetHeaderName("new name!");
+	manifest.SetHeaderUuid("new uuid!");
+
 	std::cout << manifest.GetFormatVersion() << std::endl;
 
 	std::cout << manifest.GetHeaderDescription() << std::endl;
