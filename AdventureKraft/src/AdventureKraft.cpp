@@ -1,27 +1,15 @@
 #include "DangerEngine.h"
 
+#define ADDON_VERSION {1, 0, 0}
+
 int main()
 {
 	DE::Manifest manifest(2, "AdventureKraft", "An official port of the AdventureKraft mod for Minecraft Bedrock");
 
-	manifest.SetFormatVersion(3);
-	manifest.SetHeaderDescription("new description!");
-	manifest.SetHeaderName("new name!");
-	manifest.SetHeaderUuid("new uuid!");
+	manifest.AddModule(ADDON_VERSION, "uuid", "description", DE::ModuleType::SCRIPT);
+	manifest.AddDependencie(ADDON_VERSION, "uuid");
 
-	std::cout << manifest.GetFormatVersion() << std::endl;
-
-	std::cout << manifest.GetHeaderDescription() << std::endl;
-	std::cout << manifest.GetHeaderName() << std::endl;
-	std::cout << manifest.GetHeaderUuid() << std::endl;
-
-	std::cout << manifest.GetModuleDescription(0) << std::endl;
-	std::cout << manifest.GetModuleUuid(0) << std::endl;
-
-	std::cout << manifest.GetDependenciesUuid() << std::endl;
-
-	std::cout << manifest.GetMetadataLicense() << std::endl;
-	std::cout << manifest.GetMetadataUrl() << std::endl;
+	std::cout << manifest.JsonParse();
 
 	return 0;
 }

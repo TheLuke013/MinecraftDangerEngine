@@ -6,6 +6,15 @@
 
 namespace DE
 {
+	enum class ModuleType
+	{
+		NONE,
+		RESOURCES,
+		DATA,
+		WORLD_TEMPLATE,
+		SCRIPT
+	};
+
 	class DANGER_API Manifest
 	{
 	private:
@@ -20,15 +29,6 @@ namespace DE
 		};
 
 		//MODULES
-		enum class ModuleType
-		{
-			NONE,
-			RESOURCES,
-			DATA,
-			WORLD_TEMPLATE,
-			SCRIPT
-		};
-
 		struct ModuleTemplate
 		{
 			std::string description = "<DESCRIPTION>";
@@ -45,24 +45,19 @@ namespace DE
 		};
 
 		//METADATA
-		struct GeneratedWithTemplate
-		{
-			std::string generatedWith = "DangerEngine";
-			std::vector<std::string> version;
-		};
-
 		struct MetadataTemplate
 		{
 			std::vector<std::string> authors;
 			std::string license = "<LICENSE>";
 			std::string url = "<URL>";
-			GeneratedWithTemplate generatedWith;
 		};
 
 	public:
 		Manifest(unsigned int formatVersion, const std::string& name, const std::string& description);
 
-		std::string ParseJson();
+		void AddModule(std::vector<unsigned int> version, const std::string& uuid, const std::string& description, ModuleType type);
+		void AddDependencie(std::vector<unsigned int> version, const std::string& uuid);
+		std::string JsonParse();
 
 
 		/*GETTERS*/
@@ -123,6 +118,8 @@ namespace DE
 	private:
 		unsigned int formatVersion;
 
+		bool hasDependencie;
+
 		HeaderTemplate headerData;
 		ModuleTemplate mainModule;
 		DependenciesTemplate dependenciesData;
@@ -130,7 +127,7 @@ namespace DE
 
 		std::vector<ModuleTemplate> modules;
 
-		nlohmann::json manifestJson;
+		nlohmann::ordered_json manifestJson;
 
 	};
 }

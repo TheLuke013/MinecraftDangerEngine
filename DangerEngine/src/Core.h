@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+#define DANGER_INDENT 4
+
 #ifdef _WIN32
 	#ifdef DANGER_ENGINE_EXPORTS
 		#define DANGER_API __declspec(dllexport)
