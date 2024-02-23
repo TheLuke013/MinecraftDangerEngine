@@ -5,5 +5,6 @@
 
 //MINECRAFT
 #include "Minecraft/Manifest.h"
+#include "Minecraft/Lang.h"
 
 #endif
