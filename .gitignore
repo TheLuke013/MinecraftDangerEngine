@@ -1,3 +1,11 @@
 .vs
-out
 bin
+bin-int
+
+AventureKraftBedrock.sln
+
+DangerEngine/DangerEngine.vcxproj
+DangerEngine/DangerEngine.vcxproj.filters
+
+AdventureKraft/AdventureKraft.vcxproj
+AdventureKraft/AdventureKraft.vcxproj.user
