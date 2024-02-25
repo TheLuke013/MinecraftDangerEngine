@@ -4,19 +4,12 @@
 
 int main()
 {
-	DE::Manifest manifest(2, "AdventureKraft", "An official port of the AdventureKraft mod for Minecraft Bedrock");
+	DE::ResourcePack rp(2, "AdventureKraft RP", "An official port of the AdventureKraft mod for Minecraft Bedrock", ADDON_VERSION);
+	DE::BehaviourPack bp(2, "AdventureKraft BP", "An official port of the AdventureKraft mod for Minecraft Bedrock", ADDON_VERSION);
 
-	manifest.AddModule(ADDON_VERSION, "uuid", "description", DE::ModuleType::SCRIPT);
-	manifest.AddDependencie(ADDON_VERSION, "uuid");
+	std::cout << bp.GetManifest()->JsonParse() << "\n\n";
 
-	std::cout << manifest.JsonParse() << "\n\n";
-
-	DE::Lang langs;
-	langs.AddLanguage(DE::Languages::pt_BR);
-	langs.AddLanguage(DE::Languages::en_US);
-	langs.AddLanguage(DE::Languages::es_ES);
-
-	std::cout << langs.JsonParse();
+	std::cout << rp.GetManifest()->JsonParse() << "\n\n";
 
 	return 0;
 }

@@ -7,4 +7,7 @@
 #include "Minecraft/Manifest.h"
 #include "Minecraft/Lang.h"
 
+#include "BehaviourPack.h"
+#include "ResourcePack.h"
+
 #endif

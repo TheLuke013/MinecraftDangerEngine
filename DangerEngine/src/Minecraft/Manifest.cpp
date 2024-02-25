@@ -2,18 +2,20 @@
 
 namespace DE
 {
-	Manifest::Manifest(unsigned int formatVersion, const std::string& name, const std::string& description)
+	Manifest::Manifest(unsigned int formatVersion, const std::string& name, const std::string& description, std::vector<unsigned int> version)
 		: formatVersion(formatVersion), hasDependencie(false)
 	{
 		//HEADER
 		headerData.name = name;
 		headerData.description = description;
 		headerData.uuid = "";
+		headerData.version = version;
 
 		//MAIN MODULE
 		mainModule.description = description;
 		mainModule.type = ModuleType::NONE;
 		mainModule.uuid = "";
+		mainModule.version = version;
 
 		modules.push_back(mainModule);
 	}
@@ -39,6 +41,7 @@ namespace DE
 
 	std::string Manifest::JsonParse()
 	{
+		//HEADER
 		manifestJson["format_version"] = formatVersion;
 		manifestJson["header"]["description"] = headerData.description;
 		manifestJson["header"]["name"] = headerData.name;
@@ -46,20 +49,40 @@ namespace DE
 		manifestJson["header"]["version"] = headerData.version;
 		manifestJson["header"]["min_engine_version"] = headerData.minEngineVersion;
 
+		//MODULES
 		for (int i = 0; i < modules.size(); i++)
 		{
 			manifestJson["modules"][i]["description"] = modules[i].description;
-			manifestJson["modules"][i]["type"] = modules[i].type;
+
+			//TYPE
+			switch (modules[i].type)
+			{
+			case ModuleType::RESOURCES:
+				manifestJson["modules"][i]["type"] = moduleTypeString[0];
+				break;
+			case ModuleType::DATA:
+				manifestJson["modules"][i]["type"] = moduleTypeString[1];
+				break;
+			case ModuleType::WORLD_TEMPLATE:
+				manifestJson["modules"][i]["type"] = moduleTypeString[2];
+				break;
+			case ModuleType::SCRIPT:
+				manifestJson["modules"][i]["type"] = moduleTypeString[3];
+				break;
+			}
+
 			manifestJson["modules"][i]["uuid"] = modules[i].uuid;
 			manifestJson["modules"][i]["version"] = modules[i].version;
 		}
 
+		//DEPENDENCIES
 		if (hasDependencie)
 		{
 			manifestJson["dependencies"][0]["uuid"] = dependenciesData.uuid;
 			manifestJson["dependencies"][0]["version"] = dependenciesData.version;
 		}
 
+		//METADATA
 		manifestJson["metadata"]["authors"] = metadata.authors;
 		manifestJson["metadata"]["license"] = metadata.license;
 		manifestJson["metadata"]["url"] = metadata.url;

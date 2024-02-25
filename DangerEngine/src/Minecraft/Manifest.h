@@ -53,7 +53,7 @@ namespace DE
 		};
 
 	public:
-		Manifest(unsigned int formatVersion, const std::string& name, const std::string& description);
+		Manifest(unsigned int formatVersion, const std::string& name, const std::string& description, std::vector<unsigned int> version);
 
 		void AddModule(std::vector<unsigned int> version, const std::string& uuid, const std::string& description, ModuleType type);
 		void AddDependencie(std::vector<unsigned int> version, const std::string& uuid);
@@ -128,6 +128,13 @@ namespace DE
 		std::vector<ModuleTemplate> modules;
 
 		nlohmann::ordered_json manifestJson;
+
+		std::vector<std::string> moduleTypeString = {
+			"resources",
+			"data",
+			"world_template",
+			"script"
+		};
 
 	};
 }

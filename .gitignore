@@ -6,6 +6,7 @@ AventureKraftBedrock.sln
 
 DangerEngine/DangerEngine.vcxproj
 DangerEngine/DangerEngine.vcxproj.filters
+DangerEngine/DangerEngine.vcxproj.user
 
 AdventureKraft/AdventureKraft.vcxproj
 AdventureKraft/AdventureKraft.vcxproj.user
