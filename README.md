@@ -1,7 +1,7 @@
-# AdventureKraftBedrock
-An official port of the AdventureKraft mod for Minecraft Bedrock 1.20
+# DangerEngine
+Danger Engine is a tool with which you can create your Minecraft Add-ons in C++ using just a few lines of code to generate huge JSONs.
 
-This is the official AdventureKraft repository for Bedrock Edition containing assets and tools used to port the mod
+You can use the **Addon** class to create an addon with Resource Pack and Behavior pack or create separate packages using the **BehaviorPack** and **ResourePack** classes.
 
 ## ThirdParty
 - nlohmann
