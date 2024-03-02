@@ -6,8 +6,8 @@
 //MINECRAFT
 #include "Minecraft/Manifest.h"
 #include "Minecraft/Lang.h"
-
-#include "BehaviourPack.h"
-#include "ResourcePack.h"
+#include "Minecraft/BehaviourPack.h"
+#include "Minecraft/ResourcePack.h"
+#include "Addon.h"
 
 #endif

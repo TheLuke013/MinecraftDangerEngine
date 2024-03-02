@@ -115,6 +115,8 @@ namespace DE
 		inline void SetMetadataLicense(const std::string& newLicense) { metadata.license = newLicense; }
 		inline void SetMetadataUrl(const std::string& newUrl) { metadata.url = newUrl; }
 
+		inline void AddMetadataAuthor(const std::string& newAuthor) { metadata.authors.push_back(newAuthor); }
+
 	private:
 		unsigned int formatVersion;
 
