@@ -4,11 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
-#include "include/rapidjson/document.h"
-#include "include/rapidjson/writer.h"
-#include "include/rapidjson/stringbuffer.h"
-#include "include/rapidjson/prettywriter.h"
+#include <filesystem>
 
 #ifdef _WIN32
 	#ifdef DANGER_ENGINE_EXPORTS

@@ -11,16 +11,32 @@ namespace DE
 	class DANGER_API Addon
 	{
 	private:
-		ResourcePack* rp;
-		BehaviourPack* bp;
+		struct AddonProperties
+		{
+			std::string name, minecraftPath;
+			std::string rpHeaderUUID, bpHeaderUUID, rpModuleUUID, bpModuleUUID;
+		};
+
+		std::filesystem::path workspacePath;
+
+		Minecraft::ResourcePack* rp;
+		Minecraft::BehaviourPack* bp;
+
+		AddonProperties properties;
+
+		rapidjson::Document propertiesJson;
 
 	public:
-		Addon(unsigned int formatVersion, const std::string& name,
+		Addon(const std::string& _workspacePath, const std::string& _minecraftPath, unsigned int formatVersion, const std::string& name,
 			const std::string& description, std::vector<unsigned int> version,
 			const std::string& author, const std::string& license, const std::string& url);
 
-		ResourcePack* GetRp() { return rp; };
-		BehaviourPack* GetBp() { return bp; };
+		Minecraft::ResourcePack* GetRp() { return rp; };
+		Minecraft::BehaviourPack* GetBp() { return bp; };
+
+	private:
+		std::string GetJsonAddonProperties();
+		void SaveAddonPropertiesFile();
 
 	};
 }

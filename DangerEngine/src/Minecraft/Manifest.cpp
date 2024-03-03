@@ -1,6 +1,6 @@
 #include "Manifest.h"
 
-namespace DE
+namespace Minecraft
 {
 	Manifest::Manifest(unsigned int formatVersion, const std::string& name, const std::string& description, std::vector<unsigned int> version)
 		: formatVersion(formatVersion), hasDependencie(false), manifestJson(rapidjson::kObjectType)
@@ -47,11 +47,11 @@ namespace DE
 
 		//HEADER
 		rapidjson::Value header(rapidjson::kObjectType);
-		AddStringMember(header, "description", headerData.description, allocator);
-		AddStringMember(header, "name", headerData.name, allocator);
-		AddStringMember(header, "uuid", headerData.uuid, allocator);
-		AddUIntVectorMember("version", headerData.version, header, allocator);
-		AddUIntVectorMember("min_engine_version", headerData.minEngineVersion, header, allocator);
+		DE::JSONUtils::AddStringMember(header, "description", headerData.description, allocator);
+		DE::JSONUtils::AddStringMember(header, "name", headerData.name, allocator);
+		DE::JSONUtils::AddStringMember(header, "uuid", headerData.uuid, allocator);
+		DE::JSONUtils::AddUIntVectorMember("version", headerData.version, header, allocator);
+		DE::JSONUtils::AddUIntVectorMember("min_engine_version", headerData.minEngineVersion, header, allocator);
 
 		manifestJson.AddMember("header", header, allocator);
 
@@ -61,27 +61,27 @@ namespace DE
 		for (int i = 0; i < modulesVec.size(); i++)
 		{
 			rapidjson::Value _module(rapidjson::kObjectType);
-			AddStringMember(_module, "description", modulesVec[i].description, allocator);
+			DE::JSONUtils::AddStringMember(_module, "description", modulesVec[i].description, allocator);
 		
 			//TYPE
 			switch (modulesVec[i].type)
 			{
 			case ModuleType::RESOURCES:
-				AddStringMember(_module, "type", moduleTypeString[0], allocator);
+				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString[0], allocator);
 				break;
 			case ModuleType::DATA:
-				AddStringMember(_module, "type", moduleTypeString[1], allocator);
+				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString[1], allocator);
 				break;
 			case ModuleType::WORLD_TEMPLATE:
-				AddStringMember(_module, "type", moduleTypeString[2], allocator);
+				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString[2], allocator);
 				break;
 			case ModuleType::SCRIPT:
-				AddStringMember(_module, "type", moduleTypeString[3], allocator);
+				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString[3], allocator);
 				break;
 			}
 			
-			AddStringMember(_module, "uuid", modulesVec[i].uuid, allocator);
-			AddUIntVectorMember("version", modulesVec[i].version, _module, allocator);
+			DE::JSONUtils::AddStringMember(_module, "uuid", modulesVec[i].uuid, allocator);
+			DE::JSONUtils::AddUIntVectorMember("version", modulesVec[i].version, _module, allocator);
 
 			modules.PushBack(_module, allocator);
 		}
@@ -94,8 +94,8 @@ namespace DE
 			rapidjson::Value dependencies(rapidjson::kArrayType);
 
 			rapidjson::Value dependencie(rapidjson::kObjectType);
-			AddStringMember(dependencie, "uuid", dependenciesData.uuid, allocator);
-			AddUIntVectorMember("version", dependenciesData.version, dependencie, allocator);
+			DE::JSONUtils::AddStringMember(dependencie, "uuid", dependenciesData.uuid, allocator);
+			DE::JSONUtils::AddUIntVectorMember("version", dependenciesData.version, dependencie, allocator);
 			dependencies.PushBack(dependencie, allocator);
 
 			manifestJson.AddMember("dependencies", dependencies, allocator);
@@ -103,13 +103,13 @@ namespace DE
 
 		//METADATA
 		rapidjson::Value metadata(rapidjson::kObjectType);
-		AddStringVectorMember("authors", metadataData.authors, metadata, allocator);
-		AddStringMember(metadata, "license", metadataData.license, allocator);
-		AddStringMember(metadata, "url", metadataData.url, allocator);
+		DE::JSONUtils::AddStringVectorMember("authors", metadataData.authors, metadata, allocator);
+		DE::JSONUtils::AddStringMember(metadata, "license", metadataData.license, allocator);
+		DE::JSONUtils::AddStringMember(metadata, "url", metadataData.url, allocator);
 
 		//METADATA - GENERATED_WITH
 		rapidjson::Value generatedW(rapidjson::kObjectType);
-		AddStringVectorMember("DangerEngine", metadataData.version, generatedW, allocator);
+		DE::JSONUtils::AddStringVectorMember("DangerEngine", metadataData.version, generatedW, allocator);
 		metadata.AddMember("generated_with", generatedW, allocator);
 
 		manifestJson.AddMember("metadata", metadata, allocator);
@@ -119,12 +119,5 @@ namespace DE
 		manifestJson.Accept(writter);
 
 		return buffer.GetString();
-	}
-
-	void Manifest::AddStringMember(rapidjson::Value& member, const char* key, const std::string& value, rapidjson::Document::AllocatorType& allocator)
-	{
-		rapidjson::Value v;
-		v.SetString(value.c_str(), value.size(), allocator);
-		member.AddMember(rapidjson::StringRef(key), v, allocator);
 	}
 }

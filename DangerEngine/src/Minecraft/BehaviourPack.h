@@ -6,7 +6,7 @@
 #include "Minecraft/Manifest.h"
 #include "Minecraft/Lang.h"
 
-namespace DE
+namespace Minecraft
 {
 	class DANGER_API BehaviourPack
 	{

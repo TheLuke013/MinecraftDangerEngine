@@ -1,6 +1,6 @@
 #include "Lang.h"
 
-namespace DE
+namespace Minecraft
 {
 	Lang::Lang()
 		: languagesJson(rapidjson::kArrayType)

@@ -5,6 +5,8 @@
 int main()
 {
 	DE::Addon addon(
+		"<WORKSPACE_PATH>",
+		"<MINECRAFT_PATH>",
 		2,
 		"AdventureKraft",
 		"An official port of the AdventureKraft mod for Minecraft Bedrock",
@@ -16,14 +18,7 @@ int main()
 	addon.GetBp()->GetManifest()->AddDependencie(ADDON_VERSION, "<UUID>");
 
 	std::cout << addon.GetBp()->GetManifest()->JsonParse() << "\n\n";
-
 	std::cout << addon.GetRp()->GetManifest()->JsonParse() << "\n\n";
-
-	DE::Lang lang;
-	lang.AddLanguage(DE::Languages::pt_BR);
-	lang.AddLanguage(DE::Languages::en_US);
-
-	std::cout << lang.JsonParse() << "\n\n";
 
 	return 0;
 }

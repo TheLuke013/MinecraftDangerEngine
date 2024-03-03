@@ -3,8 +3,9 @@
 
 #include "Core.h"
 #include "UUID.h"
+#include "JSON.h"
 
-namespace DE
+namespace Minecraft
 {
 	enum class ModuleType
 	{
@@ -119,43 +120,11 @@ namespace DE
 		inline void AddMetadataAuthor(const std::string& newAuthor) { metadataData.authors.push_back(newAuthor); }
 
 	private:
-		void AddStringMember(rapidjson::Value& member, const char* key, const std::string& value, rapidjson::Document::AllocatorType& allocator);
-		
-		void AddStringVectorMember(const char* key, const std::vector<std::string>& strVec, rapidjson::Value& parentValue, rapidjson::Document::AllocatorType& allocator)
-		{
-			rapidjson::Value array(rapidjson::kArrayType);
-
-			for (const auto& str : strVec)
-			{
-				rapidjson::Value value;
-				value.SetString(str.c_str(), str.length(), allocator);
-				array.PushBack(value, allocator);
-			}
-
-			rapidjson::GenericStringRef keyGenStr(key);
-			parentValue.AddMember(keyGenStr, array, allocator);
-		}
-
-		void AddUIntVectorMember(const char* key, const std::vector<unsigned int>& intVec, rapidjson::Value& parentValue, rapidjson::Document::AllocatorType& allocator)
-		{
-			rapidjson::Value array(rapidjson::kArrayType);
-
-			for (const auto& intValue : intVec)
-			{
-				rapidjson::Value value;
-				value.SetInt(intValue);
-				array.PushBack(value, allocator);
-			}
-
-			rapidjson::Value keyVal(key, allocator);
-			parentValue.AddMember(keyVal, array, allocator);
-		}
-
 		unsigned int formatVersion;
 
 		bool hasDependencie;
 
-		UUID uuid;
+		DE::UUID uuid;
 
 		HeaderTemplate headerData;
 		ModuleTemplate mainModule;

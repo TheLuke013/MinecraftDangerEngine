@@ -3,7 +3,9 @@
 
 #include "Core.h"
 
-namespace DE
+#include "JSON.h"
+
+namespace Minecraft
 {
 	enum class Languages
 	{
