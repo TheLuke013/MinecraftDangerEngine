@@ -2,7 +2,6 @@
 #define LANG_H
 
 #include "Core.h"
-#include "../nlohmann/json.hpp"
 
 namespace DE
 {
@@ -48,7 +47,7 @@ namespace DE
 		std::string JsonParse();
 
 	private:
-		nlohmann::ordered_json languagesJson;
+		rapidjson::Document languagesJson;
 
 		std::vector<Languages> languagesList;
 

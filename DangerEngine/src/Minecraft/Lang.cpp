@@ -3,8 +3,8 @@
 namespace DE
 {
 	Lang::Lang()
+		: languagesJson(rapidjson::kArrayType)
 	{
-
 	}
 
 	void Lang::AddLanguage(Languages language)
@@ -14,12 +14,15 @@ namespace DE
 
 	std::string Lang::JsonParse()
 	{
-		for (int i = 0; i < languagesList.size(); i++)
+		for (const auto& language : languagesList)
 		{
-			int index = static_cast<int>(languagesList[i]);
-			languagesJson[i] = languagesListString[index];
+			languagesJson.PushBack(rapidjson::Value(languagesListString[static_cast<int>(language)].c_str(), languagesJson.GetAllocator()), languagesJson.GetAllocator());
 		}
 
-		return languagesJson.dump(DANGER_INDENT);
+		rapidjson::StringBuffer buffer;
+		rapidjson::PrettyWriter<rapidjson::StringBuffer> writter(buffer);
+		languagesJson.Accept(writter);
+
+		return buffer.GetString();
 	}
 }

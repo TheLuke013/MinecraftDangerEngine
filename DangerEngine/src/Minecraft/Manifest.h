@@ -4,8 +4,6 @@
 #include "Core.h"
 #include "UUID.h"
 
-#include "../nlohmann/json.hpp"
-
 namespace DE
 {
 	enum class ModuleType
@@ -52,6 +50,7 @@ namespace DE
 			std::vector<std::string> authors;
 			std::string license = "<LICENSE>";
 			std::string url = "<URL>";
+			std::vector<std::string> version = { "1.0.0" };
 		};
 
 	public:
@@ -75,19 +74,19 @@ namespace DE
 		inline std::vector<unsigned int> GetHeaderMinEngineVersion() const { return headerData.minEngineVersion; }
 
 		//MODULES
-		inline std::string GetModuleDescription(unsigned int index) const { return modules[index].description; }
-		inline ModuleType GetModuleType(unsigned int index) const { return modules[index].type; }
-		inline std::string GetModuleUuid(unsigned int index) const { return modules[index].uuid; }
-		inline std::vector<unsigned int> GetModuleVersion(unsigned int index) const { return modules[index].version; }
+		inline std::string GetModuleDescription(unsigned int index) const { return modulesVec[index].description; }
+		inline ModuleType GetModuleType(unsigned int index) const { return modulesVec[index].type; }
+		inline std::string GetModuleUuid(unsigned int index) const { return modulesVec[index].uuid; }
+		inline std::vector<unsigned int> GetModuleVersion(unsigned int index) const { return modulesVec[index].version; }
 
 		//DEPENDENCIES
 		inline std::string GetDependenciesUuid() const { return dependenciesData.uuid; }
 		inline std::vector<unsigned int> GetDependenciesVersion() const { return dependenciesData.version; }
 
 		//METADATA
-		inline std::vector<std::string> GetMetadataAuthors() const { return metadata.authors; }
-		inline std::string GetMetadataLicense() const { return metadata.license; }
-		inline std::string GetMetadataUrl() const { return metadata.url; }
+		inline std::vector<std::string> GetMetadataAuthors() const { return metadataData.authors; }
+		inline std::string GetMetadataLicense() const { return metadataData.license; }
+		inline std::string GetMetadataUrl() const { return metadataData.url; }
 
 
 		/*SETTERS*/
@@ -103,23 +102,55 @@ namespace DE
 		inline void SetHeaderMinEngineVersion(std::vector<unsigned int> newEngineVersion) { headerData.minEngineVersion = newEngineVersion; }
 
 		//MODULES
-		inline void SetModuleDescription(unsigned int index, const std::string& newDescription) { modules[index].description = newDescription; }
-		inline void SetModuleType(unsigned int index, ModuleType newType) { modules[index].type = newType; }
-		inline void SetModuleUuid(unsigned int index, const std::string& newUuid) { modules[index].uuid = newUuid; }
-		inline void SetModuleVersion(unsigned int index, std::vector<unsigned int> newVersion) { modules[index].version = newVersion; }
+		inline void SetModuleDescription(unsigned int index, const std::string& newDescription) { modulesVec[index].description = newDescription; }
+		inline void SetModuleType(unsigned int index, ModuleType newType) { modulesVec[index].type = newType; }
+		inline void SetModuleUuid(unsigned int index, const std::string& newUuid) { modulesVec[index].uuid = newUuid; }
+		inline void SetModuleVersion(unsigned int index, std::vector<unsigned int> newVersion) { modulesVec[index].version = newVersion; }
 
 		//DEPENDENCIES
 		inline void SetDependenciesUuid(const std::string& newUuid) { dependenciesData.uuid = newUuid; }
 		inline void SetDependenciesVersion(std::vector<unsigned int> newVersion) { dependenciesData.version = newVersion; }
 
 		//METADATA
-		inline void SetMetadataAuthors(std::vector<std::string> newMetadataAuthors) { metadata.authors = newMetadataAuthors; }
-		inline void SetMetadataLicense(const std::string& newLicense) { metadata.license = newLicense; }
-		inline void SetMetadataUrl(const std::string& newUrl) { metadata.url = newUrl; }
+		inline void SetMetadataAuthors(std::vector<std::string> newMetadataAuthors) { metadataData.authors = newMetadataAuthors; }
+		inline void SetMetadataLicense(const std::string& newLicense) { metadataData.license = newLicense; }
+		inline void SetMetadataUrl(const std::string& newUrl) { metadataData.url = newUrl; }
 
-		inline void AddMetadataAuthor(const std::string& newAuthor) { metadata.authors.push_back(newAuthor); }
+		inline void AddMetadataAuthor(const std::string& newAuthor) { metadataData.authors.push_back(newAuthor); }
 
 	private:
+		void AddStringMember(rapidjson::Value& member, const char* key, const std::string& value, rapidjson::Document::AllocatorType& allocator);
+		
+		void AddStringVectorMember(const char* key, const std::vector<std::string>& strVec, rapidjson::Value& parentValue, rapidjson::Document::AllocatorType& allocator)
+		{
+			rapidjson::Value array(rapidjson::kArrayType);
+
+			for (const auto& str : strVec)
+			{
+				rapidjson::Value value;
+				value.SetString(str.c_str(), str.length(), allocator);
+				array.PushBack(value, allocator);
+			}
+
+			rapidjson::GenericStringRef keyGenStr(key);
+			parentValue.AddMember(keyGenStr, array, allocator);
+		}
+
+		void AddUIntVectorMember(const char* key, const std::vector<unsigned int>& intVec, rapidjson::Value& parentValue, rapidjson::Document::AllocatorType& allocator)
+		{
+			rapidjson::Value array(rapidjson::kArrayType);
+
+			for (const auto& intValue : intVec)
+			{
+				rapidjson::Value value;
+				value.SetInt(intValue);
+				array.PushBack(value, allocator);
+			}
+
+			rapidjson::Value keyVal(key, allocator);
+			parentValue.AddMember(keyVal, array, allocator);
+		}
+
 		unsigned int formatVersion;
 
 		bool hasDependencie;
@@ -129,11 +160,11 @@ namespace DE
 		HeaderTemplate headerData;
 		ModuleTemplate mainModule;
 		DependenciesTemplate dependenciesData;
-		MetadataTemplate metadata;
+		MetadataTemplate metadataData;
 
-		std::vector<ModuleTemplate> modules;
+		std::vector<ModuleTemplate> modulesVec;
 
-		nlohmann::ordered_json manifestJson;
+		rapidjson::Document manifestJson;
 
 		std::vector<std::string> moduleTypeString = {
 			"resources",

@@ -29,7 +29,6 @@ project "DangerEngine"
 	includedirs
 	{
 		"%{prj.name}/src"
-		--"%{prj.name}/ThirdParty/spdlog/include"
 	}
 
 	filter "system:windows"

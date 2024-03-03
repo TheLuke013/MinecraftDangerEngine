@@ -19,8 +19,8 @@ namespace DE
 			const std::string& description, std::vector<unsigned int> version,
 			const std::string& author, const std::string& license, const std::string& url);
 
-		ResourcePack* GetBp() { return rp; };
-		BehaviourPack* GetRp() { return bp; };
+		ResourcePack* GetRp() { return rp; };
+		BehaviourPack* GetBp() { return bp; };
 
 	};
 }
