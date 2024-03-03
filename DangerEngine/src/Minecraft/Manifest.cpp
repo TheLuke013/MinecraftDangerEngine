@@ -8,13 +8,13 @@ namespace DE
 		//HEADER
 		headerData.name = name;
 		headerData.description = description;
-		headerData.uuid = "";
+		headerData.uuid = uuid.GenerateUUIDV4();
 		headerData.version = version;
 
 		//MAIN MODULE
 		mainModule.description = description;
 		mainModule.type = ModuleType::NONE;
-		mainModule.uuid = "";
+		mainModule.uuid = uuid.GenerateUUIDV4();
 		mainModule.version = version;
 
 		modules.push_back(mainModule);

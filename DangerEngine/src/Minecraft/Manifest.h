@@ -1,7 +1,9 @@
 #ifndef MANIFEST_H
 #define MANIFEST_H
 
-#include "../Core.h"
+#include "Core.h"
+#include "UUID.h"
+
 #include "../nlohmann/json.hpp"
 
 namespace DE
@@ -121,6 +123,8 @@ namespace DE
 		unsigned int formatVersion;
 
 		bool hasDependencie;
+
+		UUID uuid;
 
 		HeaderTemplate headerData;
 		ModuleTemplate mainModule;

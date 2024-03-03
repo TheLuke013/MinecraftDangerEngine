@@ -9,5 +9,9 @@ namespace DE
 		bp->GetManifest()->AddMetadataAuthor(author);
 		bp->GetManifest()->SetMetadataLicense(license);
 		bp->GetManifest()->SetMetadataUrl(url);
+
+		rp->GetManifest()->AddMetadataAuthor(author);
+		rp->GetManifest()->SetMetadataLicense(license);
+		rp->GetManifest()->SetMetadataUrl(url);
 	}
 }

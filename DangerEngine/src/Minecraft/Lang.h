@@ -1,7 +1,7 @@
 #ifndef LANG_H
 #define LANG_H
 
-#include "../Core.h"
+#include "Core.h"
 #include "../nlohmann/json.hpp"
 
 namespace DE
