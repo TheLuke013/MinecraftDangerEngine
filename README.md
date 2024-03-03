@@ -9,4 +9,4 @@ You can use the **Addon** class to create an addon with Resource Pack and Behavi
 - Add-on Generator
 
 ## ThirdParty
-- nlohmann
+- [RapidJson](https://github.com/Tencent/rapidjson.git)
