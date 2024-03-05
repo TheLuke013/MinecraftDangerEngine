@@ -36,7 +36,11 @@ namespace DE
 
 	private:
 		std::string GetJsonAddonProperties();
-		void SaveAddonPropertiesFile();
+		void ChechAddonProperties();
+		void SaveAddonPropertiesFile(std::ofstream& fileToSave);
+		void LoadAddonPropertiesFromFile(std::ifstream& propertiesFile);
+		void SetAddonUUIDProperties();
+		void SetAddonPropertiesFromJson(const std::string& jsonContent);
 
 	};
 }

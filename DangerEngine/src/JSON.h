@@ -13,6 +13,15 @@ namespace DE
 	class DANGER_API JSONUtils
 	{
 	public:
+		static std::string GetJsonString(rapidjson::Document& document)
+		{
+			rapidjson::StringBuffer buffer;
+			rapidjson::PrettyWriter<rapidjson::StringBuffer> writter(buffer);
+			document.Accept(writter);
+
+			return buffer.GetString();
+		}
+
 		static void AddStringMember(rapidjson::Value& member, const char* key, const std::string& value, rapidjson::Document::AllocatorType& allocator)
 		{
 			rapidjson::Value v;

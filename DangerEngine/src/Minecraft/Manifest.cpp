@@ -114,10 +114,6 @@ namespace Minecraft
 
 		manifestJson.AddMember("metadata", metadata, allocator);
 
-		rapidjson::StringBuffer buffer;
-		rapidjson::PrettyWriter<rapidjson::StringBuffer> writter(buffer);
-		manifestJson.Accept(writter);
-
-		return buffer.GetString();
+		return DE::JSONUtils::GetJsonString(manifestJson);
 	}
 }

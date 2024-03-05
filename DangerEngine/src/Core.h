@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <filesystem>
+#include <fstream>
 
 #ifdef _WIN32
 	#ifdef DANGER_ENGINE_EXPORTS

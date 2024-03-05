@@ -5,7 +5,7 @@
 int main()
 {
 	DE::Addon addon(
-		"<WORKSPACE_PATH>",
+		"",
 		"<MINECRAFT_PATH>",
 		2,
 		"AdventureKraft",
@@ -15,7 +15,7 @@ int main()
 		"MIT",
 		"https://youtube.com/@TheLuke013?si=bX8nObGICp4SdhKN");
 
-	addon.GetBp()->GetManifest()->AddDependencie(ADDON_VERSION, "<UUID>");
+	addon.GetBp()->GetManifest()->AddDependencie(ADDON_VERSION, addon.GetRp()->GetManifest()->GetHeaderUuid());
 
 	std::cout << addon.GetBp()->GetManifest()->JsonParse() << "\n\n";
 	std::cout << addon.GetRp()->GetManifest()->JsonParse() << "\n\n";

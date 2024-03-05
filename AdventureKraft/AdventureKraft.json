@@ -1,0 +1,8 @@
+{
+    "name": "AdventureKraft",
+    "minecraft_path": "<MINECRAFT_PATH>",
+    "resource_header_uuid": "1abfbf37-0ee4-400b-aa82-a922fbcdef40",
+    "behaviour_header_uuid": "212979dd-2155-4edd-b38b-200a44d7f97c",
+    "resource_module_uuid": "25a1456d-1e98-4d40-a382-bec461da938a",
+    "behaviour_module_uuid": "665793a7-df1d-4b2c-81d1-6785c4911387"
+}

@@ -18,12 +18,8 @@ namespace DE
 
 		properties.name = name;
 		properties.minecraftPath = _minecraftPath;
-		properties.rpHeaderUUID = rp->GetManifest()->GetHeaderUuid();
-		properties.bpHeaderUUID = bp->GetManifest()->GetHeaderUuid();
-		properties.rpModuleUUID = rp->GetManifest()->GetModuleUuid(0);
-		properties.bpModuleUUID = bp->GetManifest()->GetModuleUuid(0);
 
-		std::cout << GetJsonAddonProperties() << "\n\n";
+		ChechAddonProperties();
 	}
 
 	std::string Addon::GetJsonAddonProperties()
@@ -44,8 +40,80 @@ namespace DE
 		return buffer.GetString();
 	}
 
-	void Addon::SaveAddonPropertiesFile()
+	void Addon::ChechAddonProperties()
 	{
+		std::string fileName = properties.name + ".json";
+		std::filesystem::path path = workspacePath / fileName;
 
+		std::ifstream propertiesFile(path);
+
+		if (!propertiesFile.good())
+		{
+			std::ofstream fileToSave(path);
+			if (fileToSave.is_open())
+			{
+				SetAddonUUIDProperties();
+				SaveAddonPropertiesFile(fileToSave);
+			}
+			else
+			{
+				std::cout << "Error: Unable to save addon properties file!\n";
+			}
+		}
+		else
+		{
+			LoadAddonPropertiesFromFile(propertiesFile);
+		}
+	}
+
+	void Addon::LoadAddonPropertiesFromFile(std::ifstream& propertiesFile)
+	{
+		std::string fileContent;
+
+		//LOAD THE FILE
+		if (propertiesFile.is_open())
+		{
+			std::string line;
+			while (std::getline(propertiesFile, line))
+			{
+				fileContent += line + "\n";
+			}
+			propertiesFile.close();
+		}
+
+		SetAddonPropertiesFromJson(fileContent);
+
+		rp->GetManifest()->SetHeaderUuid(properties.rpHeaderUUID);
+		bp->GetManifest()->SetHeaderUuid(properties.bpHeaderUUID);
+
+		rp->GetManifest()->SetModuleUuid(0, properties.rpModuleUUID);
+		bp->GetManifest()->SetModuleUuid(0, properties.bpModuleUUID);
+	}
+
+	void Addon::SaveAddonPropertiesFile(std::ofstream& fileToSave)
+	{
+		fileToSave << GetJsonAddonProperties();
+		fileToSave.close();
+	}
+
+	void Addon::SetAddonUUIDProperties()
+	{
+		properties.rpHeaderUUID = rp->GetManifest()->GetHeaderUuid();
+		properties.bpHeaderUUID = bp->GetManifest()->GetHeaderUuid();
+		properties.rpModuleUUID = rp->GetManifest()->GetModuleUuid(0);
+		properties.bpModuleUUID = bp->GetManifest()->GetModuleUuid(0);
+	}
+
+	void Addon::SetAddonPropertiesFromJson(const std::string& jsonContent)
+	{
+		rapidjson::Document propertiesJson;
+		propertiesJson.Parse(jsonContent.c_str());
+
+		properties.name = propertiesJson["name"].GetString();
+		properties.minecraftPath = propertiesJson["minecraft_path"].GetString();
+		properties.rpHeaderUUID = propertiesJson["resource_header_uuid"].GetString();
+		properties.bpHeaderUUID = propertiesJson["behaviour_header_uuid"].GetString();
+		properties.rpModuleUUID = propertiesJson["resource_module_uuid"].GetString();
+		properties.bpModuleUUID = propertiesJson["behaviour_module_uuid"].GetString();
 	}
 }
