@@ -1,4 +1,4 @@
-workspace "AventureKraftBedrock"
+workspace "DangerEngine"
 	architecture "x64"
 
 	configurations
@@ -43,7 +43,7 @@ project "DangerEngine"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/AdventureKraft")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/ExampleAddon")
 		}
 
 	filter "configurations:Debug"
@@ -58,10 +58,10 @@ project "DangerEngine"
 		defines "DE_DIST"
 		optimize "On"
 
---ADVENTURE KRAFT
+--EXAMPLE ADDON
 
-project "AdventureKraft"
-	location "AdventureKraft"
+project "ExampleAddon"
+	location "ExampleAddon"
 	kind "ConsoleApp"
 	language "C++"
 
