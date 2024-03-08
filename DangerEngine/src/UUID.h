@@ -11,13 +11,14 @@ namespace DE
 	class DANGER_API UUID
 	{
 	private:
-		std::random_device rd;
-		std::mt19937_64 gen;
-		std::uniform_int_distribution<> dis;
-		std::uniform_int_distribution<> dis2;
+		std::random_device* rd;
+		std::mt19937_64* gen;
+		std::uniform_int_distribution<>* dis;
+		std::uniform_int_distribution<>* dis2;
 
 	public:
 		UUID();
+		~UUID();
 
 		std::string GenerateUUIDV4();
 

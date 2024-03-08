@@ -1,8 +1,6 @@
 #ifndef RESOURCE_PACK_H
 #define RESOURCE_PACK_H
 
-#include "Core.h"
-
 #include "Minecraft/Manifest.h"
 #include "Minecraft/Lang.h"
 

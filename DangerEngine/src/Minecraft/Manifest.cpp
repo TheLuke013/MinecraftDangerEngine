@@ -4,8 +4,17 @@ namespace Minecraft
 {
 	Manifest::Manifest(unsigned int formatVersion, const std::string& name, const std::string& description, std::vector<unsigned int> version)
 		: formatVersion(formatVersion), hasDependencie(false), manifestJson(new rapidjson::Document(rapidjson::kObjectType)),
-		headerData(new HeaderTemplate()), mainModule(new ModuleTemplate()), dependenciesData(new DependenciesTemplate()), metadataData(new MetadataTemplate())
+		headerData(new HeaderTemplate()), mainModule(new ModuleTemplate()), dependenciesData(new DependenciesTemplate()),
+		metadataData(new MetadataTemplate()), modulesVec(new std::vector<ModuleTemplate>()), moduleTypeString(new std::vector<std::string>())
 	{
+		//MODULE TYPE STRING
+		*moduleTypeString = {
+		"resources",
+			"data",
+			"world_template",
+			"script"
+		};
+
 		//HEADER
 		headerData->name = name;
 		headerData->description = description;
@@ -18,7 +27,18 @@ namespace Minecraft
 		mainModule->uuid = uuid.GenerateUUIDV4();
 		mainModule->version = version;
 
-		modulesVec.push_back(*mainModule);
+		modulesVec->push_back(*mainModule);
+	}
+
+	Manifest::~Manifest()
+	{
+		delete headerData;
+		delete mainModule;
+		delete dependenciesData;
+		delete metadataData;
+		delete modulesVec;
+		delete manifestJson;
+		delete moduleTypeString;
 	}
 
 	void Manifest::AddModule(std::vector<unsigned int>& version, const std::string& uuid, const std::string& description, ModuleType type)
@@ -29,7 +49,7 @@ namespace Minecraft
 		newModule.uuid = uuid;
 		newModule.version = version;
 
-		modulesVec.push_back(newModule);
+		modulesVec->push_back(newModule);
 	}
 
 	void Manifest::AddDependencie(std::vector<unsigned int>& version, const std::string& uuid)
@@ -59,30 +79,30 @@ namespace Minecraft
 		//MODULES
 		rapidjson::Value modules(rapidjson::kArrayType);
 
-		for (int i = 0; i < modulesVec.size(); i++)
+		for (int i = 0; i < modulesVec->size(); i++)
 		{
 			rapidjson::Value _module(rapidjson::kObjectType);
-			DE::JSONUtils::AddStringMember(_module, "description", modulesVec[i].description, allocator);
+			DE::JSONUtils::AddStringMember(_module, "description", modulesVec->at(i).description, allocator);
 		
 			//TYPE
-			switch (modulesVec[i].type)
+			switch (modulesVec->at(i).type)
 			{
 			case ModuleType::RESOURCES:
-				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString[0], allocator);
+				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString->at(0), allocator);
 				break;
 			case ModuleType::DATA:
-				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString[1], allocator);
+				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString->at(1), allocator);
 				break;
 			case ModuleType::WORLD_TEMPLATE:
-				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString[2], allocator);
+				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString->at(2), allocator);
 				break;
 			case ModuleType::SCRIPT:
-				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString[3], allocator);
+				DE::JSONUtils::AddStringMember(_module, "type", moduleTypeString->at(3), allocator);
 				break;
 			}
 			
-			DE::JSONUtils::AddStringMember(_module, "uuid", modulesVec[i].uuid, allocator);
-			DE::JSONUtils::AddUIntVectorMember("version", modulesVec[i].version, _module, allocator);
+			DE::JSONUtils::AddStringMember(_module, "uuid", modulesVec->at(i).uuid, allocator);
+			DE::JSONUtils::AddUIntVectorMember("version", modulesVec->at(i).version, _module, allocator);
 
 			modules.PushBack(_module, allocator);
 		}

@@ -1,0 +1,8 @@
+{
+    "name": "MyAddon",
+    "minecraft_path": "<MINECRAFT_PATH>",
+    "resource_header_uuid": "28f01963-7457-418d-9beb-8710bfad32e1",
+    "behaviour_header_uuid": "1f55b0a1-e8e8-406b-aae3-1fa1cf3963c7",
+    "resource_module_uuid": "87fc4e6c-3bc2-4d38-ad35-33e6d8c1ef22",
+    "behaviour_module_uuid": "94b00b09-7327-48af-bd7f-f9e9cd43699f"
+}

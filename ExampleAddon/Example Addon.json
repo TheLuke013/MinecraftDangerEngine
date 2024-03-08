@@ -1,8 +1,0 @@
-{
-    "name": "Example Addon",
-    "minecraft_path": "<MINECRAFT_PATH>",
-    "resource_header_uuid": "c1dfb4a8-5bff-4056-95c0-e2605e910185",
-    "behaviour_header_uuid": "de8967e0-4fd1-4a4d-b839-9bf5d9bdbb6d",
-    "resource_module_uuid": "ab97cd0d-3f66-4fee-b1b9-9acf46415ce6",
-    "behaviour_module_uuid": "1d481705-58b7-4bdc-8bd4-fe8925dfdda9"
-}

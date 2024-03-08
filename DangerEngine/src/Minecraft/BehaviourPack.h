@@ -1,8 +1,6 @@
 #ifndef BEHAVIOUR_PACK_H
 #define BEHAVIOUR_PACK_H
 
-#include "Core.h"
-
 #include "Minecraft/Manifest.h"
 #include "Minecraft/Lang.h"
 

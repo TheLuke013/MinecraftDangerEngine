@@ -10,12 +10,12 @@ int main()
 		"",
 		"<MINECRAFT_PATH>",
 		2,
-		"Example Addon",
+		"MyAddon",
 		"An addon made using an amazing tool!",
 		ADDON_VERSION,
 		"TheLuke013",
 		"MIT",
-		"https://youtube.com/@TheLuke013?si=bX8nObGICp4SdhKN");
+		"https://github.com/TheLuke013/MinecraftDangerEngine.git");
 
 	addon.GetBp()->GetManifest()->AddDependencie(addonVersion, addon.GetRp()->GetManifest()->GetHeaderUuid());
 

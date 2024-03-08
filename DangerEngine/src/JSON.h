@@ -26,7 +26,7 @@ namespace DE
 		static void AddStringMember(rapidjson::Value& member, const char* key, const std::string& value, rapidjson::Document::AllocatorType& allocator)
 		{
 			rapidjson::Value v;
-			v.SetString(value.c_str(), value.size(), allocator);
+			v.SetString(value.c_str(), static_cast<rapidjson::SizeType>(value.size()), allocator);
 			member.AddMember(rapidjson::StringRef(key), v, allocator);
 		}
 
@@ -37,7 +37,7 @@ namespace DE
 			for (const auto& str : strVec)
 			{
 				rapidjson::Value value;
-				value.SetString(str.c_str(), str.length(), allocator);
+				value.SetString(str.c_str(), static_cast<rapidjson::SizeType>(str.length()), allocator);
 				array.PushBack(value, allocator);
 			}
 

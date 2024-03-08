@@ -8,5 +8,5 @@ DangerEngine/DangerEngine.vcxproj
 DangerEngine/DangerEngine.vcxproj.filters
 DangerEngine/DangerEngine.vcxproj.user
 
-ExampleAddon.vcxproj
-ExampleAddon.vcxproj.user
+Addon.vcxproj
+Addon.vcxproj.user

@@ -1,5 +1,6 @@
 workspace "DangerEngine"
 	architecture "x64"
+	startproject "Addon"
 
 	configurations
 	{
@@ -43,7 +44,7 @@ project "DangerEngine"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/ExampleAddon")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Addon")
 		}
 
 	filter "configurations:Debug"
@@ -58,16 +59,15 @@ project "DangerEngine"
 		defines "DE_DIST"
 		optimize "On"
 
---EXAMPLE ADDON
+--ADDON
 
-project "ExampleAddon"
-	location "ExampleAddon"
+project "Addon"
+	location "Addon"
 	kind "ConsoleApp"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-	debugdir ("bin/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
