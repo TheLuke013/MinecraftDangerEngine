@@ -3,7 +3,7 @@
 namespace Minecraft
 {
 	Lang::Lang()
-		: languagesJson(rapidjson::kArrayType)
+		: languagesJson(new rapidjson::Document(rapidjson::kArrayType))
 	{
 	}
 
@@ -16,9 +16,9 @@ namespace Minecraft
 	{
 		for (const auto& language : languagesList)
 		{
-			languagesJson.PushBack(rapidjson::Value(languagesListString[static_cast<int>(language)].c_str(), languagesJson.GetAllocator()), languagesJson.GetAllocator());
+			languagesJson->PushBack(rapidjson::Value(languagesListString[static_cast<int>(language)].c_str(), languagesJson->GetAllocator()), languagesJson->GetAllocator());
 		}
 
-		return DE::JSONUtils::GetJsonString(languagesJson);
+		return *DE::JSONUtils::GetJsonString(*languagesJson);
 	}
 }

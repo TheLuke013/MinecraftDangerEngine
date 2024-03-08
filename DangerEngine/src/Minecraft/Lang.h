@@ -49,7 +49,7 @@ namespace Minecraft
 		std::string JsonParse();
 
 	private:
-		rapidjson::Document languagesJson;
+		rapidjson::Document* languagesJson;
 
 		std::vector<Languages> languagesList;
 

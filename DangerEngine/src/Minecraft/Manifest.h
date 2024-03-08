@@ -57,9 +57,9 @@ namespace Minecraft
 	public:
 		Manifest(unsigned int formatVersion, const std::string& name, const std::string& description, std::vector<unsigned int> version);
 
-		void AddModule(std::vector<unsigned int> version, const std::string& uuid, const std::string& description, ModuleType type);
-		void AddDependencie(std::vector<unsigned int> version, const std::string& uuid);
-		std::string JsonParse();
+		void AddModule(std::vector<unsigned int>& version, const std::string& uuid, const std::string& description, ModuleType type);
+		void AddDependencie(std::vector<unsigned int>& version, const std::string& uuid);
+		std::string& JsonParse();
 
 
 		/*GETTERS*/
@@ -68,11 +68,11 @@ namespace Minecraft
 		//HEADER
 		inline unsigned int GetFormatVersion() { return formatVersion; }
 
-		inline std::string GetHeaderDescription() const { return headerData.description; }
-		inline std::string GetHeaderName() const { return headerData.name; }
-		inline std::string GetHeaderUuid() const { return headerData.uuid; }
-		inline std::vector<unsigned int> GetHeaderVersion() const { return headerData.version; }
-		inline std::vector<unsigned int> GetHeaderMinEngineVersion() const { return headerData.minEngineVersion; }
+		inline std::string& GetHeaderDescription() const { return headerData->description; }
+		inline std::string& GetHeaderName() const { return headerData->name; }
+		inline std::string& GetHeaderUuid() const { return headerData->uuid; }
+		inline std::vector<unsigned int> GetHeaderVersion() const { return headerData->version; }
+		inline std::vector<unsigned int> GetHeaderMinEngineVersion() const { return headerData->minEngineVersion; }
 
 		//MODULES
 		inline std::string GetModuleDescription(unsigned int index) const { return modulesVec[index].description; }
@@ -81,13 +81,13 @@ namespace Minecraft
 		inline std::vector<unsigned int> GetModuleVersion(unsigned int index) const { return modulesVec[index].version; }
 
 		//DEPENDENCIES
-		inline std::string GetDependenciesUuid() const { return dependenciesData.uuid; }
-		inline std::vector<unsigned int> GetDependenciesVersion() const { return dependenciesData.version; }
+		inline std::string GetDependenciesUuid() const { return dependenciesData->uuid; }
+		inline std::vector<unsigned int> GetDependenciesVersion() const { return dependenciesData->version; }
 
 		//METADATA
-		inline std::vector<std::string> GetMetadataAuthors() const { return metadataData.authors; }
-		inline std::string GetMetadataLicense() const { return metadataData.license; }
-		inline std::string GetMetadataUrl() const { return metadataData.url; }
+		inline std::vector<std::string> GetMetadataAuthors() const { return metadataData->authors; }
+		inline std::string GetMetadataLicense() const { return metadataData->license; }
+		inline std::string GetMetadataUrl() const { return metadataData->url; }
 
 
 		/*SETTERS*/
@@ -96,28 +96,28 @@ namespace Minecraft
 		//HEADER
 		inline void SetFormatVersion(unsigned int p_formatVersion) { formatVersion = p_formatVersion; }
 
-		inline void SetHeaderDescription(const std::string& newDescription) { headerData.description = newDescription; }
-		inline void SetHeaderName(const std::string& newName) { headerData.name = newName; }
-		inline void SetHeaderUuid(const std::string& newUuid) { headerData.uuid = newUuid; }
-		inline void SetHeaderVersion(std::vector<unsigned int> newVersion) { headerData.version = newVersion; }
-		inline void SetHeaderMinEngineVersion(std::vector<unsigned int> newEngineVersion) { headerData.minEngineVersion = newEngineVersion; }
+		inline void SetHeaderDescription(const std::string& newDescription) { headerData->description = newDescription; }
+		inline void SetHeaderName(const std::string& newName) { headerData->name = newName; }
+		inline void SetHeaderUuid(const std::string& newUuid) { headerData->uuid = newUuid; }
+		inline void SetHeaderVersion(std::vector<unsigned int>& newVersion) { headerData->version = newVersion; }
+		inline void SetHeaderMinEngineVersion(std::vector<unsigned int>& newEngineVersion) { headerData->minEngineVersion = newEngineVersion; }
 
 		//MODULES
 		inline void SetModuleDescription(unsigned int index, const std::string& newDescription) { modulesVec[index].description = newDescription; }
 		inline void SetModuleType(unsigned int index, ModuleType newType) { modulesVec[index].type = newType; }
 		inline void SetModuleUuid(unsigned int index, const std::string& newUuid) { modulesVec[index].uuid = newUuid; }
-		inline void SetModuleVersion(unsigned int index, std::vector<unsigned int> newVersion) { modulesVec[index].version = newVersion; }
+		inline void SetModuleVersion(unsigned int index, std::vector<unsigned int>& newVersion) { modulesVec[index].version = newVersion; }
 
 		//DEPENDENCIES
-		inline void SetDependenciesUuid(const std::string& newUuid) { dependenciesData.uuid = newUuid; }
-		inline void SetDependenciesVersion(std::vector<unsigned int> newVersion) { dependenciesData.version = newVersion; }
+		inline void SetDependenciesUuid(const std::string& newUuid) { dependenciesData->uuid = newUuid; }
+		inline void SetDependenciesVersion(std::vector<unsigned int>& newVersion) { dependenciesData->version = newVersion; }
 
 		//METADATA
-		inline void SetMetadataAuthors(std::vector<std::string> newMetadataAuthors) { metadataData.authors = newMetadataAuthors; }
-		inline void SetMetadataLicense(const std::string& newLicense) { metadataData.license = newLicense; }
-		inline void SetMetadataUrl(const std::string& newUrl) { metadataData.url = newUrl; }
+		inline void SetMetadataAuthors(std::vector<std::string>& newMetadataAuthors) { metadataData->authors = newMetadataAuthors; }
+		inline void SetMetadataLicense(const std::string& newLicense) { metadataData->license = newLicense; }
+		inline void SetMetadataUrl(const std::string& newUrl) { metadataData->url = newUrl; }
 
-		inline void AddMetadataAuthor(const std::string& newAuthor) { metadataData.authors.push_back(newAuthor); }
+		inline void AddMetadataAuthor(const std::string& newAuthor) { metadataData->authors.push_back(newAuthor); }
 
 	private:
 		unsigned int formatVersion;
@@ -126,14 +126,14 @@ namespace Minecraft
 
 		DE::UUID uuid;
 
-		HeaderTemplate headerData;
-		ModuleTemplate mainModule;
-		DependenciesTemplate dependenciesData;
-		MetadataTemplate metadataData;
+		HeaderTemplate* headerData;
+		ModuleTemplate* mainModule;
+		DependenciesTemplate* dependenciesData;
+		MetadataTemplate* metadataData;
 
 		std::vector<ModuleTemplate> modulesVec;
 
-		rapidjson::Document manifestJson;
+		rapidjson::Document* manifestJson;
 
 		std::vector<std::string> moduleTypeString = {
 			"resources",
