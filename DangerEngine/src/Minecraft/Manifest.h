@@ -58,7 +58,7 @@ namespace Minecraft
 		~Manifest();
 
 		void AddModule(std::vector<unsigned int>& version, const std::string& uuid, const std::string& description, ModuleType type);
-		void AddDependencie(std::vector<unsigned int>& version, const std::string& uuid);
+		void AddDependencie(std::vector<unsigned int> version, const std::string& uuid);
 		std::string& JsonParse();
 
 

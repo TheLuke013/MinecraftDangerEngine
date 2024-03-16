@@ -52,7 +52,7 @@ namespace Minecraft
 		modulesVec->push_back(newModule);
 	}
 
-	void Manifest::AddDependencie(std::vector<unsigned int>& version, const std::string& uuid)
+	void Manifest::AddDependencie(std::vector<unsigned int> version, const std::string& uuid)
 	{
 		dependenciesData->uuid = uuid;
 		dependenciesData->version = version;
