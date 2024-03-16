@@ -15,7 +15,7 @@ namespace Minecraft
 		SCRIPT
 	};
 
-	class DANGER_API Manifest
+	class Manifest
 	{
 	private:
 		//HEADER

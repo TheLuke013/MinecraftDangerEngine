@@ -6,7 +6,7 @@
 
 namespace Minecraft
 {
-	class DANGER_API ResourcePack
+	class ResourcePack
 	{
 	private:
 		Manifest* manifest;

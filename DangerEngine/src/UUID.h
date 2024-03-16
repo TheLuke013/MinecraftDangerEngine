@@ -3,12 +3,9 @@
 
 #include "Core.h"
 
-#include <random>
-#include <sstream>
-
 namespace DE
 {
-	class DANGER_API UUID
+	class UUID
 	{
 	private:
 		std::random_device* rd;

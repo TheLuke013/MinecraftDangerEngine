@@ -10,7 +10,7 @@
 
 namespace DE
 {
-	class DANGER_API JSONUtils
+	class JSONUtils
 	{
 	public:
 		static std::string* GetJsonString(rapidjson::Document& document)

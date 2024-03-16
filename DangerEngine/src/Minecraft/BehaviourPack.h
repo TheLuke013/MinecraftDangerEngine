@@ -6,7 +6,7 @@
 
 namespace Minecraft
 {
-	class DANGER_API BehaviourPack
+	class BehaviourPack
 	{
 	private:
 		Manifest* manifest;

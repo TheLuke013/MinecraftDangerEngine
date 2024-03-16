@@ -15,7 +15,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "DangerEngine"
 	location "DangerEngine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -36,16 +36,6 @@ project "DangerEngine"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
-
-		defines
-		{
-			"DANGER_ENGINE_EXPORTS"
-		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Addon")
-		}
 
 	filter "configurations:Debug"
 		defines "DE_DEBUG"
@@ -91,13 +81,13 @@ project "Addon"
 		systemversion "latest"
 
 	filter "configurations:Debug"
-		defines "AK_DEBUG"
+		defines "ADDON_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
-		defines "AK_RELEASE"
+		defines "ADDON_RELEASE"
 		optimize "On"
 
 	filter "configurations:Dist"
-		defines "AK_DIST"
+		defines "ADDON_DIST"
 		optimize "On"

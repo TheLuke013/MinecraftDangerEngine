@@ -6,7 +6,7 @@
 
 namespace DE
 {
-	class DANGER_API Addon
+	class Addon
 	{
 	private:
 		struct AddonProperties

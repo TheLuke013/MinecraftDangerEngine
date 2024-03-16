@@ -1,20 +1,12 @@
-#ifndef DLL_H
-#define DLL_H
+#ifndef CORE_H
+#define CORE_H
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <filesystem>
 #include <fstream>
-
-#ifdef _WIN32
-	#ifdef DANGER_ENGINE_EXPORTS
-		#define DANGER_API __declspec(dllexport)
-	#else
-		#define DANGER_API __declspec(dllimport)
-	#endif
-	#else
-		#define DANGER_API
-#endif
+#include <random>
+#include <sstream>
 
 #endif

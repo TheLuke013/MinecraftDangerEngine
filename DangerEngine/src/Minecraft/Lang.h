@@ -38,7 +38,7 @@ namespace Minecraft
 		ko_KR	//Korean	Korea
 	};
 
-	class DANGER_API Lang
+	class Lang
 	{
 	public:
 		Lang();
