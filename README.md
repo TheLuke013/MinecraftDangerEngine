@@ -25,6 +25,8 @@ This is a basic example of how to create an addon using the **DE::Addon** class
 ```cpp
 #include "DangerEngine.h"
 
+#define ADDON_VERSION {1, 0, 0}
+
 int main()
 {
 	DE::Addon addon(
@@ -37,6 +39,8 @@ int main()
 		"TheLuke013",
 		"MIT",
 		"https://github.com/TheLuke013/MinecraftDangerEngine.git");
+
+	addon.GetBp()->GetManifest()->AddDependencie(ADDON_VERSION, addon.GetRp()->GetManifest()->GetHeaderUuid());
 
 	return 0;
 }
