@@ -1,5 +1,7 @@
 # MinecraftDangerEngine
-Danger Engine is a tool with which you can create your Minecraft Add-ons in C++ using just a few lines of code to generate huge JSONs.
+Danger Engine is a tool with which you can create your Minecraft addons in C++ using just a few lines of code to generate huge JSONs.
+
+This tool is intended for the minecraft bedrock community that creates addons. This tool will be very useful if you want to focus on productivity and let the tool generate the entire addon for you without having to edit json manually, and also if you don't want to have a headache when Mojang changes something and your entire addon breaks, because this tool will always be updating its backend every time Mojang changes something, so you wouldn't need to modify the code that was already written, just recompile your addon.
 
 You can use the **Addon** class to create an addon with Resource Pack and Behavior pack or create separate packages using the **BehaviorPack** and **ResourePack** classes.
 
