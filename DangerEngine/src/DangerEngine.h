@@ -12,5 +12,6 @@
 //DANGER ENGINE
 #include "Addon.h"
 #include "UUID.h"
+#include "Build.h"
 
 #endif

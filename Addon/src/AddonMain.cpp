@@ -17,8 +17,7 @@ int main()
 
 	addon.GetBp()->GetManifest()->AddDependencie(ADDON_VERSION, addon.GetRp()->GetManifest()->GetHeaderUuid());
 
-	std::cout << addon.GetBp()->GetManifest()->JsonParse() << "\n\n";
-	std::cout << addon.GetRp()->GetManifest()->JsonParse() << "\n\n";
+	DE::Build build(&addon);
 
 	return 0;
 }
