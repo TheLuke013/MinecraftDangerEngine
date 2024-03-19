@@ -3,6 +3,7 @@ bin
 bin-int
 
 Addon/MyAddon.json
+Addon/build
 
 DangerEngine.sln
 

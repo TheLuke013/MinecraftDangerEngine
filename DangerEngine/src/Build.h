@@ -10,6 +10,8 @@
 #define RP_MC_NAME "\\development_resource_packs"
 #define BP_MC_NAME "\\development_behavior_packs"
 
+#define PICON_NAME "pack_icon.png"
+
 namespace DE
 {
 	enum class BuildMode

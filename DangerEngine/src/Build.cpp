@@ -21,8 +21,8 @@ namespace DE
 		}
 		case DE::BuildMode::BUILD_IN_MC_PATH:
 		{
-			rpPath = addon->GetProperties().minecraftPath + RP_MC_NAME;
-			bpPath = addon->GetProperties().minecraftPath + BP_MC_NAME;
+			rpPath = addon->GetProperties()->minecraftPath + RP_MC_NAME;
+			bpPath = addon->GetProperties()->minecraftPath + BP_MC_NAME;
 
 			CreateAddonFolders(rpPath, bpPath);
 			break;
@@ -42,17 +42,31 @@ namespace DE
 
 	void Build::CreateAddonFolders(const std::filesystem::path& rpFolderName, const std::filesystem::path& bpFolderName)
 	{
-		rpPath = rpFolderName / addon->GetProperties().name;
-		bpPath = bpFolderName / addon->GetProperties().name;
+		rpPath = rpFolderName / addon->GetProperties()->name;
+		bpPath = bpFolderName / addon->GetProperties()->name;
 
 		try
 		{
+			//Creates BP & RP folders
 			std::filesystem::create_directories(rpPath);
 			std::filesystem::create_directories(bpPath);
+
+			//Creates all manifests
+			JSONUtils::SaveJsonFile(rpPath / "manifest.json", addon->GetRp()->GetManifest()->JsonParse());
+			JSONUtils::SaveJsonFile(bpPath / "manifest.json", addon->GetBp()->GetManifest()->JsonParse());
+
+			//Copy pack_icon
+			try {
+				std::filesystem::copy_file(addon->GetWorkspacePath() / PICON_NAME, rpPath / PICON_NAME, std::filesystem::copy_options::overwrite_existing);
+				std::filesystem::copy_file(addon->GetWorkspacePath() / PICON_NAME, bpPath / PICON_NAME, std::filesystem::copy_options::overwrite_existing);
+			}
+			catch (const std::filesystem::filesystem_error& e) {
+				std::cerr << "Error: unable to copy pack_icon file: " << e.what() << std::endl;
+			}
 		}
 		catch (const std::filesystem::filesystem_error& e)
 		{
-			std::cerr << "Error: unable to create directory: " << e.what() << std::endl;
+			std::cerr << "Error: unable to create addon folder: " << e.what() << std::endl;
 		}
 	}
 }

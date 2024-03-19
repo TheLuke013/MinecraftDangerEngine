@@ -20,7 +20,7 @@ namespace DE
 		Minecraft::ResourcePack* rp;
 		Minecraft::BehaviourPack* bp;
 
-		AddonProperties properties;
+		AddonProperties* properties;
 
 		rapidjson::Document* propertiesJson;
 
@@ -33,13 +33,12 @@ namespace DE
 		Minecraft::ResourcePack* GetRp() { return rp; };
 		Minecraft::BehaviourPack* GetBp() { return bp; };
 
-		AddonProperties GetProperties() { return properties; };
+		AddonProperties* GetProperties() { return properties; };
 		std::filesystem::path GetWorkspacePath() { return *workspacePath; };
 
 	private:
 		std::string GetJsonAddonProperties();
 		void CheckAddonProperties();
-		void SaveAddonPropertiesFile(std::ofstream& fileToSave);
 		void LoadAddonPropertiesFromFile(std::ifstream& propertiesFile);
 		void SetAddonUUIDProperties();
 		void SetAddonPropertiesFromJson(const std::string& jsonContent);

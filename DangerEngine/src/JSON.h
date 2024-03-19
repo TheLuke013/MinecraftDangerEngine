@@ -13,6 +13,20 @@ namespace DE
 	class JSONUtils
 	{
 	public:
+		static void SaveJsonFile(const std::filesystem::path& path, const std::string& content)
+		{
+			std::ofstream fileToSave(path);
+			if (fileToSave.is_open())
+			{
+				fileToSave << content;
+				fileToSave.close();
+			}
+			else
+			{
+				std::cout << "Error: Unable to save json file: " << path << "\n";
+			}
+		}
+
 		static std::string* GetJsonString(rapidjson::Document& document)
 		{
 			rapidjson::StringBuffer buffer;
