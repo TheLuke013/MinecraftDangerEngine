@@ -25,7 +25,7 @@ namespace DE
 		rapidjson::Document* propertiesJson;
 
 	public:
-		Addon(const std::string& _workspacePath, const std::string& _minecraftPath, unsigned int formatVersion, const std::string& name,
+		Addon(const std::string& _workspacePath, unsigned int formatVersion, const std::string& name,
 			const std::string& description, std::vector<unsigned int> version,
 			const std::string& author, const std::string& license, const std::string& url);
 		~Addon();
@@ -33,13 +33,18 @@ namespace DE
 		Minecraft::ResourcePack* GetRp() { return rp; };
 		Minecraft::BehaviourPack* GetBp() { return bp; };
 
+		AddonProperties GetProperties() { return properties; };
+		std::filesystem::path GetWorkspacePath() { return *workspacePath; };
+
 	private:
 		std::string GetJsonAddonProperties();
-		void ChechAddonProperties();
+		void CheckAddonProperties();
 		void SaveAddonPropertiesFile(std::ofstream& fileToSave);
 		void LoadAddonPropertiesFromFile(std::ifstream& propertiesFile);
 		void SetAddonUUIDProperties();
 		void SetAddonPropertiesFromJson(const std::string& jsonContent);
+
+		std::string GetMinecraftPath();
 
 	};
 }

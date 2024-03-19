@@ -2,6 +2,8 @@
 bin
 bin-int
 
+Addon/MyAddon.json
+
 DangerEngine.sln
 
 DangerEngine/DangerEngine.vcxproj

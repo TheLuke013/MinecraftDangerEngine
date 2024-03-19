@@ -3,14 +3,33 @@
 namespace DE
 {
 	Build::Build(Addon* addonPtr)
-		: addon(addonPtr)
+		: addon(addonPtr), rpPath(""), bpPath("")
 	{
-		std::cout << GetMinecraftPath() << "\n";
 	}
 
-	void Build::BuildAddon()
+	void Build::BuildAddon(BuildMode buildMode)
 	{
+		switch (buildMode)
+		{
+		case DE::BuildMode::BUILD_IN_WORKSPACE:
+		{
+			rpPath = addon->GetWorkspacePath().string() + RP_WS_NAME;
+			bpPath = addon->GetWorkspacePath().string() + BP_WS_NAME;
 
+			CreateAddonFolders(rpPath, bpPath);
+			break;
+		}
+		case DE::BuildMode::BUILD_IN_MC_PATH:
+		{
+			rpPath = addon->GetProperties().minecraftPath + RP_MC_NAME;
+			bpPath = addon->GetProperties().minecraftPath + BP_MC_NAME;
+
+			CreateAddonFolders(rpPath, bpPath);
+			break;
+		}
+		default:
+			break;
+		}
 	}
 
 	void Build::BuildMcaddon()
@@ -21,41 +40,19 @@ namespace DE
 	{
 	}
 
-	std::string Build::GetMinecraftPath()
+	void Build::CreateAddonFolders(const std::filesystem::path& rpFolderName, const std::filesystem::path& bpFolderName)
 	{
-		std::filesystem::path minecraftPath = "";
+		rpPath = rpFolderName / addon->GetProperties().name;
+		bpPath = bpFolderName / addon->GetProperties().name;
 
-		//GETTING Local Appdata
-		char* localAppdataDir = nullptr;
-		errno_t err = _dupenv_s(&localAppdataDir, 0, "LOCALAPPDATA");
-
-		if (!(err == 0 && localAppdataDir != nullptr))
+		try
 		{
-			std::cerr << "Error: unable to access local appdata!\n";
-			return "";
+			std::filesystem::create_directories(rpPath);
+			std::filesystem::create_directories(bpPath);
 		}
-
-		//GETTING Minecraft package folder
-		std::filesystem::path packagesDir = localAppdataDir;
-		packagesDir = packagesDir / "Packages";
-
-		std::string keywordDir = "Microsoft.MinecraftUWP";
-
-		//Search for the MinecraftUWP package directory
-		for (const auto& entry : std::filesystem::directory_iterator(packagesDir))
+		catch (const std::filesystem::filesystem_error& e)
 		{
-			if (std::filesystem::is_directory(entry) && entry.path().filename().string().find(keywordDir) != std::string::npos)
-			{
-				minecraftPath = entry.path();
-				break;
-			}
+			std::cerr << "Error: unable to create directory: " << e.what() << std::endl;
 		}
-
-		free(localAppdataDir);
-
-		//Minecraft full path
-		minecraftPath = minecraftPath / "LocalState" / "games" / "com.mojang";
-
-		return minecraftPath.string();
 	}
 }

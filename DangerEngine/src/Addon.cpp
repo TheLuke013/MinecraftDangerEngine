@@ -2,7 +2,7 @@
 
 namespace DE
 {
-	Addon::Addon(const std::string& _workspacePath, const std::string& _minecraftPath, unsigned int formatVersion,
+	Addon::Addon(const std::string& _workspacePath, unsigned int formatVersion,
 		const std::string& name, const std::string& description,
 		std::vector<unsigned int> version, const std::string& author, const std::string& license, const std::string& url)
 		: workspacePath(new std::filesystem::path(_workspacePath)), rp(new Minecraft::ResourcePack(formatVersion, name, description, version)), bp(new Minecraft::BehaviourPack(formatVersion, name, description, version)),
@@ -17,9 +17,8 @@ namespace DE
 		rp->GetManifest()->SetMetadataUrl(url);
 
 		properties.name = name;
-		properties.minecraftPath = _minecraftPath;
 
-		ChechAddonProperties();
+		CheckAddonProperties();
 	}
 
 	Addon::~Addon()
@@ -47,7 +46,7 @@ namespace DE
 		return buffer.GetString();
 	}
 
-	void Addon::ChechAddonProperties()
+	void Addon::CheckAddonProperties()
 	{
 		std::string fileName = properties.name + ".json";
 		std::filesystem::path path = *workspacePath / fileName;
@@ -59,6 +58,7 @@ namespace DE
 			std::ofstream fileToSave(path);
 			if (fileToSave.is_open())
 			{
+				properties.minecraftPath = GetMinecraftPath();
 				SetAddonUUIDProperties();
 				SaveAddonPropertiesFile(fileToSave);
 			}
@@ -122,5 +122,43 @@ namespace DE
 		properties.bpHeaderUUID = propertiesJson["behaviour_header_uuid"].GetString();
 		properties.rpModuleUUID = propertiesJson["resource_module_uuid"].GetString();
 		properties.bpModuleUUID = propertiesJson["behaviour_module_uuid"].GetString();
+	}
+
+	std::string Addon::GetMinecraftPath()
+	{
+		std::filesystem::path minecraftPath = "";
+
+		//GETTING Local Appdata
+		char* localAppdataDir = nullptr;
+		errno_t err = _dupenv_s(&localAppdataDir, 0, "LOCALAPPDATA");
+
+		if (!(err == 0 && localAppdataDir != nullptr))
+		{
+			std::cerr << "Error: unable to access local appdata!\n";
+			return "";
+		}
+
+		//GETTING Minecraft package folder
+		std::filesystem::path packagesDir = localAppdataDir;
+		packagesDir = packagesDir / "Packages";
+
+		std::string keywordDir = "Microsoft.MinecraftUWP";
+
+		//Search for the MinecraftUWP package directory
+		for (const auto& entry : std::filesystem::directory_iterator(packagesDir))
+		{
+			if (std::filesystem::is_directory(entry) && entry.path().filename().string().find(keywordDir) != std::string::npos)
+			{
+				minecraftPath = entry.path();
+				break;
+			}
+		}
+
+		free(localAppdataDir);
+
+		//Minecraft full path
+		minecraftPath = minecraftPath / "LocalState" / "games" / "com.mojang";
+
+		return minecraftPath.string();
 	}
 }

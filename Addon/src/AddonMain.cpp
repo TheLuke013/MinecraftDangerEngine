@@ -5,8 +5,7 @@
 int main()
 {
 	DE::Addon addon(
-		"",
-		"<MINECRAFT_PATH>",
+		".",
 		2,
 		"MyAddon",
 		"An addon made using an amazing tool!",
@@ -18,6 +17,8 @@ int main()
 	addon.GetBp()->GetManifest()->AddDependencie(ADDON_VERSION, addon.GetRp()->GetManifest()->GetHeaderUuid());
 
 	DE::Build build(&addon);
+	build.BuildAddon(DE::BuildMode::BUILD_IN_WORKSPACE);
+	//build.BuildAddon(DE::BuildMode::BUILD_IN_MC_PATH);
 
 	return 0;
 }
