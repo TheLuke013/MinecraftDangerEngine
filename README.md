@@ -9,7 +9,7 @@ This tool is intended for the minecraft bedrock community that creates addons. T
 - Add-on Generator
 
 ## Prerequisites
-- Windows.
+- Windows 10/11.
 - Visual Studio 2019 or higher installed.
 
 ## Build and Installation
