@@ -1,0 +1,3 @@
+[submodule "DangerEngine/ThirdParty/rapidjson"]
+	path = DangerEngine/ThirdParty/rapidjson
+	url = https://github.com/Tencent/rapidjson.git
