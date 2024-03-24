@@ -3,10 +3,10 @@
 
 #include "Core.h"
 
-#include "include/rapidjson/document.h"
-#include "include/rapidjson/writer.h"
-#include "include/rapidjson/stringbuffer.h"
-#include "include/rapidjson/prettywriter.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/prettywriter.h"
 
 namespace DE
 {

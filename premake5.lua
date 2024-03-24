@@ -29,7 +29,8 @@ project "DangerEngine"
 
 	includedirs
 	{
-		"%{prj.name}/src"
+		"%{prj.name}/src",
+		"%{prj.name}/ThirdParty/rapidjson/include"
 	}
 
 	filter "system:windows"
@@ -67,7 +68,8 @@ project "Addon"
 
 	includedirs
 	{
-		"DangerEngine/src"
+		"DangerEngine/src",
+		"DangerEngine/ThirdParty/rapidjson/include"
 	}
 
 	links
