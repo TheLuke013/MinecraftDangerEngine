@@ -9,6 +9,9 @@ namespace DE
 
 	void Build::BuildAddon(BuildMode buildMode)
 	{
+		LOG_TRACE("Initializing Building...");
+		LOG_TRACE("Building " + addon->GetProperties()->name);
+
 		switch (buildMode)
 		{
 		case DE::BuildMode::BUILD_IN_WORKSPACE:
@@ -53,20 +56,30 @@ namespace DE
 
 			//Creates all manifests
 			JSONUtils::SaveJsonFile(rpPath / "manifest.json", addon->GetRp()->GetManifest()->JsonParse());
+			LOG_TRACE("Created the Resource Pack Manifest");
+			
 			JSONUtils::SaveJsonFile(bpPath / "manifest.json", addon->GetBp()->GetManifest()->JsonParse());
+			LOG_TRACE("Created the Behaviour Pack Manifest");
 
 			//Copy pack_icon
-			try {
+			try
+			{
 				std::filesystem::copy_file(addon->GetWorkspacePath() / PICON_NAME, rpPath / PICON_NAME, std::filesystem::copy_options::overwrite_existing);
+				LOG_TRACE("Copied pack_icon.png to Resource Pack folder");
+
 				std::filesystem::copy_file(addon->GetWorkspacePath() / PICON_NAME, bpPath / PICON_NAME, std::filesystem::copy_options::overwrite_existing);
+				LOG_TRACE("Copied pack_icon.png to Behaviour Pack folder");
 			}
-			catch (const std::filesystem::filesystem_error& e) {
-				std::cerr << "Error: unable to copy pack_icon file: " << e.what() << std::endl;
+			catch (const std::filesystem::filesystem_error& e) 
+			{
+				std::string err = e.what();
+				LOG_CRITICAL("Error: unable to copy pack_icon file: " + err);
 			}
 		}
 		catch (const std::filesystem::filesystem_error& e)
 		{
-			std::cerr << "Error: unable to create addon folder: " << e.what() << std::endl;
+			std::string err = e.what();
+			LOG_CRITICAL("Error: unable to create addon folder: " + err);
 		}
 	}
 }

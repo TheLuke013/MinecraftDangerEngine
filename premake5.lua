@@ -30,7 +30,8 @@ project "DangerEngine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/ThirdParty/rapidjson/include"
+		"%{prj.name}/ThirdParty/rapidjson/include",
+		"%{prj.name}/ThirdParty/spdlog/include"
 	}
 
 	filter "system:windows"
@@ -69,7 +70,8 @@ project "Addon"
 	includedirs
 	{
 		"DangerEngine/src",
-		"DangerEngine/ThirdParty/rapidjson/include"
+		"DangerEngine/ThirdParty/rapidjson/include",
+		"DangerEngine/ThirdParty/spdlog/include"
 	}
 
 	links

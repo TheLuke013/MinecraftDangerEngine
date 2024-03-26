@@ -120,7 +120,7 @@ namespace DE
 
 		if (!(err == 0 && localAppdataDir != nullptr))
 		{
-			std::cerr << "Error: unable to access local appdata!\n";
+			LOG_CRITICAL("Error: unable to access local appdata!");
 			return "";
 		}
 

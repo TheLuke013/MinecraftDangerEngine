@@ -23,7 +23,7 @@ namespace DE
 			}
 			else
 			{
-				std::cout << "Error: Unable to save json file: " << path << "\n";
+				LOG_ERROR("Error: Unable to save json file: ", path.string());
 			}
 		}
 

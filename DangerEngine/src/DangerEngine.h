@@ -13,5 +13,6 @@
 #include "Addon.h"
 #include "UUID.h"
 #include "Build.h"
+#include "Log.h"
 
 #endif

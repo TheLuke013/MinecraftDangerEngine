@@ -4,6 +4,8 @@
 
 int main()
 {
+	DE::InitDE();
+
 	DE::Addon addon(
 		".",
 		2,
