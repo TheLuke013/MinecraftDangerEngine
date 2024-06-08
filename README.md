@@ -9,19 +9,20 @@ This tool is intended for the minecraft bedrock community that creates addons. T
 - Add-on Generator
 
 ## Prerequisites
-- Windows 10/11.
-- Visual Studio 2019 or higher installed.
+- Windows 10/11;
+- x64 system architecture;
+- Visual Studio 2022.
 
 ## Build and Installation
-1. Clone the repository using `git clone https://github.com/TheLuke013/MinecraftDangerEngine.git`.
-2. Go to the cloned repository folder and run the bat script `GenerateProjects.bat`.
-3. Click on the `DangerEngine.sln` file to open the solution in Visual Studio.
+1. Clone the repository using `git clone --recurse-submodules https://github.com/TheLuke013/MinecraftDangerEngine.git`;
+2. Go to the cloned repository folder and run the bat script `GenerateSolution.bat`;
+3. Click on the `DangerEngine.sln` file to open the solution in Visual Studio;
 4. Press `F5` to build the entire solution and run it.
 
 ## Basic Example
 This is a basic example of how to create an addon using the **DE::Addon** class
 ```cpp
-#include "DangerEngine.h"
+#include <DangerEngine/DangerEngine.h>
 
 #define ADDON_VERSION {1, 0, 0}
 
