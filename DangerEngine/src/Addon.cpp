@@ -28,6 +28,43 @@ namespace DE
 		delete propertiesJson;
 	}
 
+	void Addon::AddDependencie(PackType from, PackType to, std::vector<unsigned int> version)
+	{
+		switch (from)
+		{
+		//RESOURCE PACK
+		case ResourcePack:
+			switch (to)
+			{
+			case ResourcePack:
+				LOG_ERROR("It is not possible to add self-dependency!");
+				break;
+			case BehaviourPack:
+				GetBp()->GetManifest()->AddDependencie(version, GetRp()->GetManifest()->GetHeaderUuid());
+				break;
+			default:
+				return;
+			}
+			break;
+		//BEHAVIOUR PACK
+		case BehaviourPack:
+			switch (to)
+			{
+			case ResourcePack:
+				GetRp()->GetManifest()->AddDependencie(version, GetBp()->GetManifest()->GetHeaderUuid());
+				break;
+			case BehaviourPack:
+				LOG_ERROR("It is not possible to add self-dependency!");
+				break;
+			default:
+				return;
+			}
+			break;
+		default:
+			return;
+		}
+	}
+
 	std::string Addon::GetJsonAddonProperties()
 	{
 		rapidjson::Document::AllocatorType& allocator = propertiesJson->GetAllocator();

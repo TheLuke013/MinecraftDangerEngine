@@ -18,8 +18,6 @@ namespace DE
 	};
 }
 
-//log macros
-
 #define LOG_TRACE(...)		::DE::Log::GetLogger()->trace(__VA_ARGS__)
 #define LOG_INFO(...)		::DE::Log::GetLogger()->info(__VA_ARGS__)
 #define LOG_WARN(...)		::DE::Log::GetLogger()->warn(__VA_ARGS__)

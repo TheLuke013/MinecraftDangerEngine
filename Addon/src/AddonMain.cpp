@@ -1,7 +1,5 @@
 #include <DangerEngine/DangerEngine.h>
 
-#define ADDON_VERSION {1, 0, 0}
-
 int main()
 {
 	DE::InitDE();
@@ -11,12 +9,12 @@ int main()
 		2,
 		"MyAddon",
 		"An addon made using an amazing tool!",
-		ADDON_VERSION,
+		DE_DEFAULT_VERSION,
 		"TheLuke013",
 		"MIT",
 		"https://github.com/TheLuke013/MinecraftDangerEngine.git");
 
-	addon.GetBp()->GetManifest()->AddDependencie(ADDON_VERSION, addon.GetRp()->GetManifest()->GetHeaderUuid());
+	addon.AddDependencie(DE::ResourcePack, DE::BehaviourPack, DE_DEFAULT_VERSION);
 
 	DE::Build build(&addon);
 	build.BuildAddon(DE::BuildMode::BUILD_IN_WORKSPACE);

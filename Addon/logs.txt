@@ -1,0 +1,6 @@
+[01:03:22] LOG: Initializing Building...
+[01:03:22] LOG: Building MyAddon
+[01:03:22] LOG: Created the Resource Pack Manifest
+[01:03:22] LOG: Created the Behaviour Pack Manifest
+[01:03:22] LOG: Copied pack_icon.png to Resource Pack folder
+[01:03:22] LOG: Copied pack_icon.png to Behaviour Pack folder

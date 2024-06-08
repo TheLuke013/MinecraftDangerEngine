@@ -4,8 +4,16 @@
 #include "DangerEngine/Minecraft/ResourcePack.h"
 #include "DangerEngine/Minecraft/BehaviourPack.h"
 
+#define DE_DEFAULT_VERSION {1, 0, 0}
+
 namespace DE
 {
+	enum PackType
+	{
+		ResourcePack,
+		BehaviourPack
+	};
+
 	class Addon
 	{
 	private:
@@ -35,6 +43,8 @@ namespace DE
 
 		AddonProperties* GetProperties() { return properties; };
 		std::filesystem::path GetWorkspacePath() { return *workspacePath; };
+
+		void AddDependencie(PackType from, PackType to, std::vector<unsigned int> version);
 
 	private:
 		std::string GetJsonAddonProperties();
