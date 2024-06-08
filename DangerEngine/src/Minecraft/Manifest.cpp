@@ -8,8 +8,9 @@ namespace Minecraft
 		metadataData(new MetadataTemplate()), modulesVec(new std::vector<ModuleTemplate>()), moduleTypeString(new std::vector<std::string>())
 	{
 		//MODULE TYPE STRING
-		*moduleTypeString = {
-		"resources",
+		*moduleTypeString = 
+		{
+			"resources",
 			"data",
 			"world_template",
 			"script"

@@ -74,6 +74,21 @@ namespace DE
 			parentValue.AddMember(keyVal, array, allocator);
 		}
 
+		static void AddFloatVectorMember(const char* key, const std::vector<float>& floatVec, rapidjson::Value& parentValue, rapidjson::Document::AllocatorType& allocator)
+		{
+			rapidjson::Value array(rapidjson::kArrayType);
+
+			for (const auto& intValue : floatVec)
+			{
+				rapidjson::Value value;
+				value.SetFloat(intValue);
+				array.PushBack(value, allocator);
+			}
+
+			rapidjson::Value keyVal(key, allocator);
+			parentValue.AddMember(keyVal, array, allocator);
+		}
+
 	};
 }
 

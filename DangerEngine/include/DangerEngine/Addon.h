@@ -4,7 +4,11 @@
 #include "DangerEngine/Minecraft/ResourcePack.h"
 #include "DangerEngine/Minecraft/BehaviourPack.h"
 
-#define DE_DEFAULT_VERSION {1, 0, 0}
+#define DE_VERSION {1, 0, 0}
+#define DE_FORMAT_VERSION 2
+#define DE_WORKSPACE "."
+#define DE_LICENSE "MIT"
+#define DE_URL "https://github.com/TheLuke013/MinecraftDangerEngine.git"
 
 namespace DE
 {

@@ -1,6 +1,50 @@
-[01:03:22] LOG: Initializing Building...
-[01:03:22] LOG: Building MyAddon
-[01:03:22] LOG: Created the Resource Pack Manifest
-[01:03:22] LOG: Created the Behaviour Pack Manifest
-[01:03:22] LOG: Copied pack_icon.png to Resource Pack folder
-[01:03:22] LOG: Copied pack_icon.png to Behaviour Pack folder
+[15:43:17] LOG: {
+    "entity_sounds": {
+        "entities": {
+            "minecraft:cow": {
+                "volume": 1,
+                "pitch": [
+                    1.0,
+                    1.0
+                ],
+                "death": {
+                    "sound": "cow.death",
+                    "volume": 1,
+                    "pitch": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                "hurt": {
+                    "sound": "cow.hurt",
+                    "volume": 1,
+                    "pitch": [
+                        1.0,
+                        1.0
+                    ]
+                }
+            },
+            "minecraft:chicken": {
+                "volume": 1,
+                "pitch": [
+                    1.0,
+                    1.0
+                ],
+                "death": {
+                    "sound": "chicken.death",
+                    "volume": 1,
+                    "pitch": [
+                        1.0,
+                        1.0
+                    ]
+                }
+            }
+        }
+    }
+}
+[15:43:17] LOG: Initializing Building...
+[15:43:17] LOG: Building MyAddon
+[15:43:17] LOG: Created the Resource Pack Manifest
+[15:43:17] LOG: Created the Behaviour Pack Manifest
+[15:43:17] LOG: Copied pack_icon.png to Resource Pack folder
+[15:43:17] LOG: Copied pack_icon.png to Behaviour Pack folder

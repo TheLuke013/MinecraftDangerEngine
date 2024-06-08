@@ -8,6 +8,7 @@
 #include "Minecraft/Lang.h"
 #include "Minecraft/BehaviourPack.h"
 #include "Minecraft/ResourcePack.h"
+#include "Minecraft/Sounds.h"
 
 //DANGER ENGINE
 #include "Addon.h"

@@ -1,7 +1,6 @@
 #ifndef CORE_H
 #define CORE_H
 
-//STD
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,7 +10,6 @@
 #include <sstream>
 #include <cstdlib>
 
-//DE
 #include "DangerEngine/Log.h"
 
 namespace DE

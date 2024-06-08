@@ -8,13 +8,14 @@ namespace Minecraft
 {
 	class ResourcePack
 	{
-	private:
-		Manifest* manifest;
-
 	public:
 		ResourcePack(unsigned int formatVersion, const std::string& name, const std::string& description, std::vector<unsigned int> version);
+		~ResourcePack();
 
 		Manifest* GetManifest() const { return manifest; }
+
+	private:
+		Manifest* manifest;
 
 	};
 }

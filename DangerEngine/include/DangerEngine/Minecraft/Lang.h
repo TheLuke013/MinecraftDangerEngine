@@ -5,7 +5,7 @@
 
 namespace Minecraft
 {
-	enum class Languages
+	enum Languages
 	{
 		id_ID,	//Indonesian	Indonesia
 		da_DK,	//Danish	Denmark

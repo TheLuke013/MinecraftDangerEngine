@@ -7,4 +7,9 @@ namespace Minecraft
 	{
 		manifest->SetModuleType(0, ModuleType::DATA);
 	}
+
+	BehaviourPack::~BehaviourPack()
+	{
+		delete manifest;
+	}
 }

@@ -8,14 +8,14 @@ namespace Minecraft
 {
 	class BehaviourPack
 	{
-	private:
-		Manifest* manifest;
-
 	public:
 		BehaviourPack(unsigned int formatVersion, const std::string& name, const std::string& description, std::vector<unsigned int> version);
+		~BehaviourPack();
 
 		Manifest* GetManifest() const { return manifest; }
 
+	private:
+		Manifest* manifest;
 	};
 }
 
