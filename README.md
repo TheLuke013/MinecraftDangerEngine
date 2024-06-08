@@ -14,7 +14,7 @@ This tool is intended for the minecraft bedrock community that creates addons. T
 - Visual Studio 2022.
 
 ## Build and Installation
-1. Clone the repository using `git clone --recurse-submodules https://github.com/TheLuke013/MinecraftDangerEngine.git`;
+1. Clone the repository using `git clone https://github.com/TheLuke013/MinecraftDangerEngine.git`;
 2. Go to the cloned repository folder and run the bat script `GenerateSolution.bat`;
 3. Click on the `DangerEngine.sln` file to open the solution in Visual Studio;
 4. Press `F5` to build the entire solution and run it.
@@ -24,8 +24,6 @@ This is a basic example of how to create an addon using the **DE::Addon** class
 ```cpp
 #include <DangerEngine/DangerEngine.h>
 
-#define ADDON_VERSION {1, 0, 0}
-
 int main()
 {
 	DE::Addon addon(
@@ -33,12 +31,12 @@ int main()
 		2,
 		"MyAddon",
 		"An addon made using an amazing tool!",
-		ADDON_VERSION,
+		DE_DEFAULT_VERSION,
 		"TheLuke013",
 		"MIT",
 		"https://github.com/TheLuke013/MinecraftDangerEngine.git");
 
-	addon.GetBp()->GetManifest()->AddDependencie(ADDON_VERSION, addon.GetRp()->GetManifest()->GetHeaderUuid());
+	addon.AddDependencie(DE::ResourcePack, DE::BehaviourPack, DE_DEFAULT_VERSION);
 
 	DE::Build build(&addon);
 	build.BuildAddon(DE::BuildMode::BUILD_IN_WORKSPACE);
@@ -50,3 +48,4 @@ int main()
 
 ## ThirdParty
 - [RapidJson](https://github.com/Tencent/rapidjson.git)
+- [spdlog](https://github.com/gabime/spdlog.git)
