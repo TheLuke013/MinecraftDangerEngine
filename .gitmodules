@@ -1,6 +1,0 @@
-[submodule "DangerEngine/ThirdParty/rapidjson"]
-	path = DangerEngine/ThirdParty/rapidjson
-	url = https://github.com/Tencent/rapidjson.git
-[submodule "DangerEngine/ThirdParty/spdlog"]
-	path = DangerEngine/ThirdParty/spdlog
-	url = https://github.com/gabime/spdlog.git

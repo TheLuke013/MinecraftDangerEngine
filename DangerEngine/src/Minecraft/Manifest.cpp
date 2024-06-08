@@ -1,4 +1,4 @@
-#include "Manifest.h"
+#include "DangerEngine/Minecraft/Manifest.h"
 
 namespace Minecraft
 {

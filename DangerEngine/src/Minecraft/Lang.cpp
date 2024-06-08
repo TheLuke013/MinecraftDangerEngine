@@ -1,4 +1,4 @@
-#include "Lang.h"
+#include "DangerEngine/Minecraft/Lang.h"
 
 namespace Minecraft
 {

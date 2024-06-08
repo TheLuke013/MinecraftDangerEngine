@@ -23,33 +23,28 @@ project "DangerEngine"
 
 	files
 	{
-		"%{prj.name}/src/**.h",
+		"%{prj.name}/include/**.h",
 		"%{prj.name}/src/**.cpp"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS",
+		"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
 	}
 
 	includedirs
 	{
-		"%{prj.name}/src",
-		"%{prj.name}/ThirdParty/rapidjson/include",
-		"%{prj.name}/ThirdParty/spdlog/include"
+		"%{prj.name}/include",
+		"ThirdParty/rapidjson/include",
+		"ThirdParty/spdlog/include"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
-
-	filter "configurations:Debug"
-		defines "DE_DEBUG"
-		symbols "On"
-
-	filter "configurations:Release"
-		defines "DE_RELEASE"
-		optimize "On"
-
-	filter "configurations:Dist"
-		defines "DE_DIST"
-		optimize "On"
 
 --ADDON
 
@@ -67,11 +62,18 @@ project "Addon"
 		"%{prj.name}/src/**.cpp"
 	}
 
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS",
+		"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
+	}
+
 	includedirs
 	{
-		"DangerEngine/src",
-		"DangerEngine/ThirdParty/rapidjson/include",
-		"DangerEngine/ThirdParty/spdlog/include"
+		"DangerEngine/include",
+		"ThirdParty/rapidjson/include",
+		"ThirdParty/spdlog/include"
 	}
 
 	links
@@ -83,15 +85,3 @@ project "Addon"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
-
-	filter "configurations:Debug"
-		defines "ADDON_DEBUG"
-		symbols "On"
-
-	filter "configurations:Release"
-		defines "ADDON_RELEASE"
-		optimize "On"
-
-	filter "configurations:Dist"
-		defines "ADDON_DIST"
-		optimize "On"

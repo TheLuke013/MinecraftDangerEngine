@@ -1,4 +1,4 @@
-#include "DangerEngine.h"
+#include <DangerEngine/DangerEngine.h>
 
 #define ADDON_VERSION {1, 0, 0}
 
